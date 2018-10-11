@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		19009B62216D2C290018798E /* NoteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19009B61216D2C290018798E /* NoteDetailsViewController.xib */; };
+		19009B65216D2FB80018798E /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19009B64216D2FB80018798E /* Date+Utils.swift */; };
+		19009B67216D38580018798E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19009B66216D38580018798E /* CoreDataStack.swift */; };
+		19009B6A216D3CF80018798E /* Evercel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 19009B68216D3CF80018798E /* Evercel.xcdatamodeld */; };
+		19009B6F216D42E20018798E /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19009B6B216D42E20018798E /* Note+CoreDataClass.swift */; };
+		19009B70216D42E20018798E /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19009B6C216D42E20018798E /* Note+CoreDataProperties.swift */; };
+		19009B75216D56020018798E /* Notebook+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19009B73216D56020018798E /* Notebook+CoreDataClass.swift */; };
+		19009B76216D56020018798E /* Notebook+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19009B74216D56020018798E /* Notebook+CoreDataProperties.swift */; };
+		1985DA69216BEF300056C67C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA68216BEF300056C67C /* AppDelegate.swift */; };
+		1985DA6E216BEF300056C67C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1985DA6C216BEF300056C67C /* Main.storyboard */; };
+		1985DA70216BEF320056C67C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1985DA6F216BEF320056C67C /* Assets.xcassets */; };
+		1985DA73216BEF320056C67C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1985DA71216BEF320056C67C /* LaunchScreen.storyboard */; };
+		1985DA7C216BF1FC0056C67C /* NotebookListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA7B216BF1FC0056C67C /* NotebookListViewController.swift */; };
+		1985DA7E216BFB140056C67C /* NotebookListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA7D216BFB140056C67C /* NotebookListCell.swift */; };
+		1985DA81216BFC850056C67C /* deprecated_Notebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA80216BFC850056C67C /* deprecated_Notebook.swift */; };
+		1985DA83216C02C10056C67C /* deprecated_Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA82216C02C10056C67C /* deprecated_Note.swift */; };
+		1985DA86216C03BD0056C67C /* NoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA85216C03BD0056C67C /* NoteListViewController.swift */; };
+		1985DA8A216C0DA60056C67C /* NoteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA88216C0DA60056C67C /* NoteDetailsViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		19009B61216D2C290018798E /* NoteDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteDetailsViewController.xib; sourceTree = "<group>"; };
+		19009B64216D2FB80018798E /* Date+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
+		19009B66216D38580018798E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		19009B69216D3CF80018798E /* Evercel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Evercel.xcdatamodel; sourceTree = "<group>"; };
+		19009B6B216D42E20018798E /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
+		19009B6C216D42E20018798E /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		19009B73216D56020018798E /* Notebook+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notebook+CoreDataClass.swift"; sourceTree = "<group>"; };
+		19009B74216D56020018798E /* Notebook+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notebook+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1985DA65216BEF300056C67C /* Evercel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Evercel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1985DA68216BEF300056C67C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1985DA6D216BEF300056C67C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1985DA6F216BEF320056C67C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1985DA72216BEF320056C67C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1985DA74216BEF320056C67C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1985DA7B216BF1FC0056C67C /* NotebookListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookListViewController.swift; sourceTree = "<group>"; };
+		1985DA7D216BFB140056C67C /* NotebookListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookListCell.swift; sourceTree = "<group>"; };
+		1985DA80216BFC850056C67C /* deprecated_Notebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deprecated_Notebook.swift; sourceTree = "<group>"; };
+		1985DA82216C02C10056C67C /* deprecated_Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deprecated_Note.swift; sourceTree = "<group>"; };
+		1985DA85216C03BD0056C67C /* NoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewController.swift; sourceTree = "<group>"; };
+		1985DA88216C0DA60056C67C /* NoteDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1985DA62216BEF300056C67C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19009B63216D2F990018798E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				19009B64216D2FB80018798E /* Date+Utils.swift */,
+				19009B66216D38580018798E /* CoreDataStack.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		1985DA5C216BEF300056C67C = {
+			isa = PBXGroup;
+			children = (
+				1985DA67216BEF300056C67C /* Evercel */,
+				1985DA66216BEF300056C67C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1985DA66216BEF300056C67C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1985DA65216BEF300056C67C /* Evercel.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1985DA67216BEF300056C67C /* Evercel */ = {
+			isa = PBXGroup;
+			children = (
+				19009B63216D2F990018798E /* Utils */,
+				1985DA87216C0D4A0056C67C /* NoteDetails */,
+				1985DA7F216BFC770056C67C /* Model */,
+				1985DA84216C03870056C67C /* NoteList */,
+				1985DA7A216BF0100056C67C /* NotebookList */,
+				1985DA68216BEF300056C67C /* AppDelegate.swift */,
+				1985DA6C216BEF300056C67C /* Main.storyboard */,
+				1985DA6F216BEF320056C67C /* Assets.xcassets */,
+				1985DA71216BEF320056C67C /* LaunchScreen.storyboard */,
+				1985DA74216BEF320056C67C /* Info.plist */,
+				19009B68216D3CF80018798E /* Evercel.xcdatamodeld */,
+			);
+			path = Evercel;
+			sourceTree = "<group>";
+		};
+		1985DA7A216BF0100056C67C /* NotebookList */ = {
+			isa = PBXGroup;
+			children = (
+				1985DA7B216BF1FC0056C67C /* NotebookListViewController.swift */,
+				1985DA7D216BFB140056C67C /* NotebookListCell.swift */,
+			);
+			path = NotebookList;
+			sourceTree = "<group>";
+		};
+		1985DA7F216BFC770056C67C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19009B73216D56020018798E /* Notebook+CoreDataClass.swift */,
+				19009B74216D56020018798E /* Notebook+CoreDataProperties.swift */,
+				19009B6B216D42E20018798E /* Note+CoreDataClass.swift */,
+				19009B6C216D42E20018798E /* Note+CoreDataProperties.swift */,
+				1985DA80216BFC850056C67C /* deprecated_Notebook.swift */,
+				1985DA82216C02C10056C67C /* deprecated_Note.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1985DA84216C03870056C67C /* NoteList */ = {
+			isa = PBXGroup;
+			children = (
+				1985DA85216C03BD0056C67C /* NoteListViewController.swift */,
+			);
+			path = NoteList;
+			sourceTree = "<group>";
+		};
+		1985DA87216C0D4A0056C67C /* NoteDetails */ = {
+			isa = PBXGroup;
+			children = (
+				1985DA88216C0DA60056C67C /* NoteDetailsViewController.swift */,
+				19009B61216D2C290018798E /* NoteDetailsViewController.xib */,
+			);
+			path = NoteDetails;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1985DA64216BEF300056C67C /* Evercel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1985DA77216BEF320056C67C /* Build configuration list for PBXNativeTarget "Evercel" */;
+			buildPhases = (
+				1985DA61216BEF300056C67C /* Sources */,
+				1985DA62216BEF300056C67C /* Frameworks */,
+				1985DA63216BEF300056C67C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Evercel;
+			productName = Evercel;
+			productReference = 1985DA65216BEF300056C67C /* Evercel.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1985DA5D216BEF300056C67C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "Cristian Espes";
+				TargetAttributes = {
+					1985DA64216BEF300056C67C = {
+						CreatedOnToolsVersion = 10.0;
+					};
+				};
+			};
+			buildConfigurationList = 1985DA60216BEF300056C67C /* Build configuration list for PBXProject "Evercel" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1985DA5C216BEF300056C67C;
+			productRefGroup = 1985DA66216BEF300056C67C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1985DA64216BEF300056C67C /* Evercel */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1985DA63216BEF300056C67C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19009B62216D2C290018798E /* NoteDetailsViewController.xib in Resources */,
+				1985DA73216BEF320056C67C /* LaunchScreen.storyboard in Resources */,
+				1985DA70216BEF320056C67C /* Assets.xcassets in Resources */,
+				1985DA6E216BEF300056C67C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1985DA61216BEF300056C67C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19009B6A216D3CF80018798E /* Evercel.xcdatamodeld in Sources */,
+				1985DA83216C02C10056C67C /* deprecated_Note.swift in Sources */,
+				19009B6F216D42E20018798E /* Note+CoreDataClass.swift in Sources */,
+				1985DA7C216BF1FC0056C67C /* NotebookListViewController.swift in Sources */,
+				1985DA86216C03BD0056C67C /* NoteListViewController.swift in Sources */,
+				19009B70216D42E20018798E /* Note+CoreDataProperties.swift in Sources */,
+				19009B67216D38580018798E /* CoreDataStack.swift in Sources */,
+				19009B76216D56020018798E /* Notebook+CoreDataProperties.swift in Sources */,
+				1985DA69216BEF300056C67C /* AppDelegate.swift in Sources */,
+				1985DA81216BFC850056C67C /* deprecated_Notebook.swift in Sources */,
+				19009B65216D2FB80018798E /* Date+Utils.swift in Sources */,
+				19009B75216D56020018798E /* Notebook+CoreDataClass.swift in Sources */,
+				1985DA8A216C0DA60056C67C /* NoteDetailsViewController.swift in Sources */,
+				1985DA7E216BFB140056C67C /* NotebookListCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1985DA6C216BEF300056C67C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1985DA6D216BEF300056C67C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1985DA71216BEF320056C67C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1985DA72216BEF320056C67C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1985DA75216BEF320056C67C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1985DA76216BEF320056C67C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1985DA78216BEF320056C67C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W9B4U9692J;
+				INFOPLIST_FILE = Evercel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.celes.Evercel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1985DA79216BEF320056C67C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W9B4U9692J;
+				INFOPLIST_FILE = Evercel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.celes.Evercel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1985DA60216BEF300056C67C /* Build configuration list for PBXProject "Evercel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1985DA75216BEF320056C67C /* Debug */,
+				1985DA76216BEF320056C67C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1985DA77216BEF320056C67C /* Build configuration list for PBXNativeTarget "Evercel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1985DA78216BEF320056C67C /* Debug */,
+				1985DA79216BEF320056C67C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		19009B68216D3CF80018798E /* Evercel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				19009B69216D3CF80018798E /* Evercel.xcdatamodel */,
+			);
+			currentVersion = 19009B69216D3CF80018798E /* Evercel.xcdatamodel */;
+			path = Evercel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 1985DA5D216BEF300056C67C /* Project object */;
+}
