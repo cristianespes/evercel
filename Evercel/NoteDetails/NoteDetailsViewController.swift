@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import CoreData
+
+protocol NoteDetailsViewControllerDelegate: class {
+    func didSaveNote()
+}
 
 class NoteDetailsViewController: UIViewController {
     
@@ -22,16 +27,21 @@ class NoteDetailsViewController: UIViewController {
     //let note: Note
     
     enum Kind {
-        case new
-        case existing(Note)
+        case new(notebook: Notebook)
+        case existing(note: Note)
     }
+    
+    let managedContext : NSManagedObjectContext
     
     let kind: Kind
     
+    weak var delegate: NoteDetailsViewControllerDelegate?
+    
     // MARK: - Initialization
-    init(kind: Kind) {
+    init(kind: Kind, managedContext: NSManagedObjectContext) {
         //self.note = note
         self.kind = kind
+        self.managedContext = managedContext
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -60,7 +70,44 @@ class NoteDetailsViewController: UIViewController {
         }
     }
 
-    @objc private func saveNote() { }
+    @objc private func saveNote() {
+        switch kind {
+        case .new(let notebook):
+            let note = Note(context: managedContext)
+            note.title = titleTextField.text
+            note.text = descriptionTextView.text
+            note.lastSeenDate = NSDate()
+            
+            // Settear la relación inversa
+            // El note tiene que pertenecer a los notes de ... tal, sino puede saltar un error
+            if let notes = notebook.notes?.mutableCopy() as? NSMutableOrderedSet {
+                notes.add(note)
+                notebook.notes = notes
+            }
+            
+            do {
+                try managedContext.save()
+                delegate?.didSaveNote()
+            } catch let error as NSError {
+                print("Error: \(error.localizedDescription)")
+            }
+            
+            dismiss(animated: true, completion: nil)
+            
+        case .existing(let note):
+            note.title = titleTextField.text
+            note.text = descriptionTextView.text
+            note.lastSeenDate = NSDate()
+            
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print("Error: \(error.localizedDescription)")
+            }
+            
+            navigationController?.popViewController(animated: true)
+        }
+    }
     
     @objc private func cancel() {
         dismiss(animated: true, completion: nil)
@@ -68,7 +115,7 @@ class NoteDetailsViewController: UIViewController {
     
     private func configureValues() {
         title = kind.title
-        titleTextField.text = kind.note?.text
+        titleTextField.text = kind.note?.title
         //tagsLabel.text = note.tags?.joined(separator: ",")
         creationDateLabel.text = "Creado: \((kind.note?.creationDate as Date?)?.customStringLabel() ?? "ND")"
         lastSeenDateLabel.text = "Visto: \((kind.note?.lastSeenDate as Date?)?.customStringLabel() ?? "ND")"

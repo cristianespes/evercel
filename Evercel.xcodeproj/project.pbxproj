@@ -90,10 +90,10 @@
 			isa = PBXGroup;
 			children = (
 				19009B63216D2F990018798E /* Utils */,
-				1985DA87216C0D4A0056C67C /* NoteDetails */,
 				1985DA7F216BFC770056C67C /* Model */,
-				1985DA84216C03870056C67C /* NoteList */,
 				1985DA7A216BF0100056C67C /* NotebookList */,
+				1985DA84216C03870056C67C /* NoteList */,
+				1985DA87216C0D4A0056C67C /* NoteDetails */,
 				1985DA68216BEF300056C67C /* AppDelegate.swift */,
 				1985DA6C216BEF300056C67C /* Main.storyboard */,
 				1985DA6F216BEF320056C67C /* Assets.xcassets */,
@@ -116,10 +116,10 @@
 		1985DA7F216BFC770056C67C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				19009B73216D56020018798E /* Notebook+CoreDataClass.swift */,
-				19009B74216D56020018798E /* Notebook+CoreDataProperties.swift */,
 				19009B6B216D42E20018798E /* Note+CoreDataClass.swift */,
 				19009B6C216D42E20018798E /* Note+CoreDataProperties.swift */,
+				19009B73216D56020018798E /* Notebook+CoreDataClass.swift */,
+				19009B74216D56020018798E /* Notebook+CoreDataProperties.swift */,
 				1985DA80216BFC850056C67C /* deprecated_Notebook.swift */,
 				1985DA82216C02C10056C67C /* deprecated_Note.swift */,
 			);

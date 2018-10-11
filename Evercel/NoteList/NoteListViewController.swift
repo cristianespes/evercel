@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class NoteListViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class NoteListViewController: UIViewController {
     }()
     
     let notebook: Notebook //deprecated_Notebook
+    let managedContext: NSManagedObjectContext
     
 //    var notes: [deprecated_Note] = [] {
 //        didSet {
@@ -24,15 +26,23 @@ class NoteListViewController: UIViewController {
 //        }
 //    }
     
+//    var notes: [Note] {
+//        guard let notes = notebook.notes?.array else {return []}
+//
+//        return notes as! [Note]
+//    }
+    
     var notes: [Note] {
-        guard let notes = notebook.notes?.array else {return []}
-        
-        return notes as! [Note]
+        didSet {
+            tableView.reloadData()
+        }
     }
     
     //init(notebook: deprecated_Notebook) {
-    init(notebook: Notebook) {
+    init(notebook: Notebook, managedContext: NSManagedObjectContext) {
         self.notebook = notebook
+        self.notes = (notebook.notes?.array as? [Note]) ?? []
+        self.managedContext = managedContext
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -48,7 +58,7 @@ class NoteListViewController: UIViewController {
         title = "Notas"
         
 //        notes = notebook.notes
-        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.isTranslucent = false
         navigationItem.largeTitleDisplayMode = .never
         
         let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add
@@ -59,7 +69,8 @@ class NoteListViewController: UIViewController {
     }
     
     @objc private func addNote() {
-        let newNoteVC = NoteDetailsViewController(kind: .new)
+        let newNoteVC = NoteDetailsViewController(kind: .new(notebook: notebook), managedContext: managedContext)
+        newNoteVC.delegate = self
         let navVC = UINavigationController(rootViewController: newNoteVC)
         present(navVC, animated: true, completion: nil)
     }
@@ -95,7 +106,14 @@ extension NoteListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let note = notes[indexPath.row]
         //let detailVC = NoteDetailsViewController(note: notes[indexPath.row])
-        let detailVC = NoteDetailsViewController(kind: .existing(note))
+        let detailVC = NoteDetailsViewController(kind: .existing(note: note), managedContext: managedContext)
+        detailVC.delegate = self
         show(detailVC, sender: nil)
+    }
+}
+
+extension NoteListViewController: NoteDetailsViewControllerDelegate {
+    func didSaveNote() {
+        notes = (notebook.notes?.array as? [Note]) ?? []
     }
 }
