@@ -13,6 +13,7 @@ class NotebookListViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var totalLabel: UILabel!
     
     var managedContext: NSManagedObjectContext! // Beware to have a value before presenting the VC
     
@@ -22,14 +23,7 @@ class NotebookListViewController: UIViewController {
 //        }
 //    }
     
-    var dataSource: [NSManagedObject] {
-        do {
-            return try managedContext.fetch(Notebook.fetchRequest())
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            return []
-        }
-    }
+    var dataSource: [NSManagedObject] = []
     
     override func viewDidLoad() {
 //        model = deprecated_Notebook.dummyNotebookModel
@@ -41,6 +35,37 @@ class NotebookListViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        reloadView()
+    }
+    
+    private func reloadView() {
+        do {
+            dataSource = try managedContext.fetch(Notebook.fetchRequest())
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            dataSource = []
+        }
+        
+        populateTotalLabel()
+        
+        tableView.reloadData()
+    }
+    
+    private func populateTotalLabel() {
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "Notebook")
+        fetchRequest.resultType = .countResultType
+        
+        let predicate = NSPredicate(value: true)
+        fetchRequest.predicate = predicate
+        
+        do {
+            let countResult = try managedContext.fetch(fetchRequest)
+            let count = countResult.first!.intValue
+            totalLabel.text = "\(count)"
+        } catch let error as NSError {
+            print("Count not fetch: \(error)")
+        }
     }
     
     @IBAction func addNotebook(_ sender: UIBarButtonItem) {
@@ -60,7 +85,8 @@ class NotebookListViewController: UIViewController {
                 print(error.localizedDescription)
             }
             
-            self.tableView.reloadData()
+            //self.tableView.reloadData()
+            self.reloadView()
         }
         
         let cancelAction = UIAlertAction(title: "Cancelar", style: .default)
@@ -105,7 +131,7 @@ extension NotebookListViewController: UITableViewDelegate {
         //navigationController?.show(notesListVC, sender: nil) // Es lo mismo, pero no es necesario que exista un navC
         
         let notebook = dataSource[indexPath.row] as! Notebook
-        let notesListVC = NoteListViewController(notebook: notebook)
+        let notesListVC = NoteListViewController(notebook: notebook, managedContext: managedContext)
         show(notesListVC, sender: nil)
     }
     
@@ -122,11 +148,12 @@ extension NotebookListViewController: UITableViewDelegate {
         
         do {
             try managedContext.save()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            //tableView.deleteRows(at: [indexPath], with: .automatic)
         } catch let error as NSError{
             print("Error: \(error.localizedDescription)")
         }
         
-        tableView.reloadData()
+        //tableView.reloadData()
+        reloadView()
     }
 }

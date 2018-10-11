@@ -72,14 +72,34 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U5Z-li-giq">
+                                <rect key="frame" x="0.0" y="646.5" width="375" height="20.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total de Notebooks:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozW-mg-96R">
+                                        <rect key="frame" x="0.0" y="0.0" width="153.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="XXXX" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fI6-f0-4zL">
+                                        <rect key="frame" x="153.5" y="0.0" width="221.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="WAo-uD-GFl" firstAttribute="top" secondItem="b5g-uu-wYe" secondAttribute="top" id="0pW-a8-FBs"/>
                             <constraint firstItem="WAo-uD-GFl" firstAttribute="top" secondItem="b5g-uu-wYe" secondAttribute="top" id="0ux-XU-ISy"/>
+                            <constraint firstAttribute="trailing" secondItem="U5Z-li-giq" secondAttribute="trailing" id="9QQ-WX-P55"/>
                             <constraint firstItem="WAo-uD-GFl" firstAttribute="leading" secondItem="b5g-uu-wYe" secondAttribute="leading" id="DZI-Rb-UGi"/>
+                            <constraint firstItem="b5g-uu-wYe" firstAttribute="bottom" secondItem="U5Z-li-giq" secondAttribute="bottom" id="Kl1-7A-D6L"/>
                             <constraint firstItem="WAo-uD-GFl" firstAttribute="trailing" secondItem="b5g-uu-wYe" secondAttribute="trailing" id="YfO-iF-Ib1"/>
                             <constraint firstItem="WAo-uD-GFl" firstAttribute="bottom" secondItem="b5g-uu-wYe" secondAttribute="bottom" id="nnD-W8-u1t"/>
+                            <constraint firstItem="U5Z-li-giq" firstAttribute="leading" secondItem="1d3-P2-llM" secondAttribute="leading" id="thf-J8-4Qx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b5g-uu-wYe"/>
                     </view>
@@ -92,6 +112,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="WAo-uD-GFl" id="LiA-LA-RNY"/>
+                        <outlet property="totalLabel" destination="fI6-f0-4zL" id="8cc-hy-Eep"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="daH-fE-JC2" userLabel="First Responder" sceneMemberID="firstResponder"/>
