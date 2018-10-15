@@ -29,13 +29,34 @@
                 <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xij-DR-vel" userLabel="Tarjeta">
                     <rect key="frame" x="20" y="64" width="335" height="180"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="120x180" highlightedImage="120x180" translatesAutoresizingMaskIntoConstraints="NO" id="PF9-Of-ze7">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1v-eO-RX3">
                             <rect key="frame" x="0.0" y="0.0" width="120" height="180"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="120x180" highlightedImage="120x180" translatesAutoresizingMaskIntoConstraints="NO" id="PF9-Of-ze7">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="180"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vVg-Xm-yiX">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="180"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                    <state key="normal" title="Edit">
+                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="pickImage:" destination="-1" eventType="touchUpInside" id="zQ4-IN-ay6"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="120" id="kYV-rv-jA7"/>
-                                <constraint firstAttribute="width" secondItem="PF9-Of-ze7" secondAttribute="height" multiplier="1:1.5" id="osC-9j-auF"/>
+                                <constraint firstAttribute="trailing" secondItem="vVg-Xm-yiX" secondAttribute="trailing" id="Bqg-dN-ghJ"/>
+                                <constraint firstAttribute="bottom" secondItem="vVg-Xm-yiX" secondAttribute="bottom" id="GbO-Lu-NYj"/>
+                                <constraint firstAttribute="width" constant="120" id="IBH-O4-Q1g"/>
+                                <constraint firstAttribute="width" secondItem="Z1v-eO-RX3" secondAttribute="height" multiplier="2:3" id="IDn-ty-eOC"/>
+                                <constraint firstItem="vVg-Xm-yiX" firstAttribute="leading" secondItem="Z1v-eO-RX3" secondAttribute="leading" id="IEA-tk-o4y"/>
+                                <constraint firstItem="vVg-Xm-yiX" firstAttribute="top" secondItem="Z1v-eO-RX3" secondAttribute="top" id="YqL-go-Mtk"/>
                             </constraints>
-                        </imageView>
+                        </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Nnu-Oo-XzI" userLabel="Datos">
                             <rect key="frame" x="128" y="0.0" width="207" height="180"/>
                             <subviews>

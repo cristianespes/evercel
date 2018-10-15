@@ -15,6 +15,10 @@
 		19009B76216D56020018798E /* Notebook+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19009B74216D56020018798E /* Notebook+CoreDataProperties.swift */; };
 		1906B5FC21751C5E00DBBF51 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B5FA21751C5E00DBBF51 /* Note+CoreDataClass.swift */; };
 		1906B5FD21751C5E00DBBF51 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B5FB21751C5E00DBBF51 /* Note+CoreDataProperties.swift */; };
+		1906B60121753AE700DBBF51 /* UIImage+ReSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B5FE21753AE700DBBF51 /* UIImage+ReSize.swift */; };
+		1906B60221753AE700DBBF51 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B5FF21753AE700DBBF51 /* UIImage+Alpha.swift */; };
+		1906B60321753AE700DBBF51 /* UIImage+RoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B60021753AE700DBBF51 /* UIImage+RoundCorner.swift */; };
+		1906B6052175459000DBBF51 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B6042175459000DBBF51 /* Animator.swift */; };
 		1985DA69216BEF300056C67C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA68216BEF300056C67C /* AppDelegate.swift */; };
 		1985DA6E216BEF300056C67C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1985DA6C216BEF300056C67C /* Main.storyboard */; };
 		1985DA70216BEF320056C67C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1985DA6F216BEF320056C67C /* Assets.xcassets */; };
@@ -41,6 +45,10 @@
 		1906B5F921751AEB00DBBF51 /* Evercel v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Evercel v2.xcdatamodel"; sourceTree = "<group>"; };
 		1906B5FA21751C5E00DBBF51 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1906B5FB21751C5E00DBBF51 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1906B5FE21753AE700DBBF51 /* UIImage+ReSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ReSize.swift"; sourceTree = "<group>"; };
+		1906B5FF21753AE700DBBF51 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
+		1906B60021753AE700DBBF51 /* UIImage+RoundCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RoundCorner.swift"; sourceTree = "<group>"; };
+		1906B6042175459000DBBF51 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		1985DA65216BEF300056C67C /* Evercel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Evercel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1985DA68216BEF300056C67C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1985DA6D216BEF300056C67C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -73,8 +81,12 @@
 		19009B63216D2F990018798E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1906B5FF21753AE700DBBF51 /* UIImage+Alpha.swift */,
+				1906B5FE21753AE700DBBF51 /* UIImage+ReSize.swift */,
+				1906B60021753AE700DBBF51 /* UIImage+RoundCorner.swift */,
 				19009B64216D2FB80018798E /* Date+Utils.swift */,
 				19009B66216D38580018798E /* CoreDataStack.swift */,
+				1906B6042175459000DBBF51 /* Animator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -238,7 +250,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1906B6052175459000DBBF51 /* Animator.swift in Sources */,
 				19EE6FFC216FFE62000BF95A /* NewNotesListViewController.swift in Sources */,
+				1906B60121753AE700DBBF51 /* UIImage+ReSize.swift in Sources */,
 				19009B6A216D3CF80018798E /* Evercel.xcdatamodeld in Sources */,
 				1985DA83216C02C10056C67C /* deprecated_Note.swift in Sources */,
 				1985DA7C216BF1FC0056C67C /* NotebookListViewController.swift in Sources */,
@@ -247,8 +261,10 @@
 				19EE700021700193000BF95A /* NotesListCollectionViewCell.swift in Sources */,
 				19009B76216D56020018798E /* Notebook+CoreDataProperties.swift in Sources */,
 				1985DA69216BEF300056C67C /* AppDelegate.swift in Sources */,
+				1906B60221753AE700DBBF51 /* UIImage+Alpha.swift in Sources */,
 				1985DA81216BFC850056C67C /* deprecated_Notebook.swift in Sources */,
 				19009B65216D2FB80018798E /* Date+Utils.swift in Sources */,
+				1906B60321753AE700DBBF51 /* UIImage+RoundCorner.swift in Sources */,
 				1906B5FC21751C5E00DBBF51 /* Note+CoreDataClass.swift in Sources */,
 				19009B75216D56020018798E /* Notebook+CoreDataClass.swift in Sources */,
 				1985DA8A216C0DA60056C67C /* NoteDetailsViewController.swift in Sources */,

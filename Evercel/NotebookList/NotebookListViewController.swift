@@ -15,7 +15,8 @@ class NotebookListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalLabel: UILabel!
     
-    var managedContext: NSManagedObjectContext! // Beware to have a value before presenting the VC
+    //var managedContext: NSManagedObjectContext! // Beware to have a value before presenting the VC
+    var coreDataStack: CoreDataStack!
     
 //    var model: [deprecated_Notebook] = [] {
 //        didSet {
@@ -41,7 +42,7 @@ class NotebookListViewController: UIViewController {
         
         return NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: managedContext,
+            managedObjectContext: coreDataStack.managedContext,
             sectionNameKeyPath: #keyPath(Notebook.creationDate),
             cacheName: nil)
     }
@@ -106,7 +107,7 @@ class NotebookListViewController: UIViewController {
         fetchRequest.predicate = predicate
         
         do {
-            let countResult = try managedContext.fetch(fetchRequest)
+            let countResult = try coreDataStack.managedContext.fetch(fetchRequest)
             let count = countResult.first!.intValue
             totalLabel.text = "\(count)"
         } catch let error as NSError {
@@ -120,12 +121,12 @@ class NotebookListViewController: UIViewController {
         let saveAction = UIAlertAction(title: "Guardar", style: .default) { [unowned self] action in
             guard let textField = alert.textFields?.first, let nameToSave = textField.text else { return }
             
-            let notebook = Notebook(context: self.managedContext) // Crea el entity (inicializo una clase de CoreData)
+            let notebook = Notebook(context: self.coreDataStack.managedContext) // Crea el entity (inicializo una clase de CoreData)
             notebook.name = nameToSave
             notebook.creationDate = NSDate()
             
             do {
-                try self.managedContext.save() // Guarda
+                try self.coreDataStack.managedContext.save() // Guarda
             } catch let error as NSError {
                 print("TODO error handling")
                 print(error.localizedDescription)
@@ -192,7 +193,7 @@ extension NotebookListViewController: UITableViewDelegate {
         let notebook = fetchedResultsController.object(at: indexPath)
         //let notesListVC = NoteListViewController(notebook: notebook, managedContext: managedContext)
         
-        let notesListVC = NewNotesListViewController(notebook: notebook, managedContext: managedContext)
+        let notesListVC = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
         
         show(notesListVC, sender: nil)
     }
@@ -215,10 +216,10 @@ extension NotebookListViewController: UITableViewDelegate {
         
         let notebookToRemove = fetchedResultsController.object(at: indexPath)
         
-        managedContext.delete(notebookToRemove)
+        coreDataStack.managedContext.delete(notebookToRemove)
         
         do {
-            try managedContext.save()
+            try coreDataStack.managedContext.save()
             //tableView.deleteRows(at: [indexPath], with: .automatic)
         } catch let error as NSError{
             print("Error: \(error.localizedDescription)")

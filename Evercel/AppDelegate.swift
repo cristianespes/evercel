@@ -25,7 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             else { return true }
         
         // Inyectar CoreData Stack al VC
-        viewController.managedContext = coreDataStack.managedContext
+        //viewController.managedContext = coreDataStack.managedContext
+        viewController.coreDataStack = coreDataStack
         
         return true
     }
