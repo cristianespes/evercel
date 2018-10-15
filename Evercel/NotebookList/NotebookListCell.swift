@@ -24,6 +24,6 @@ class NotebookListCell: UITableViewCell {
     //func configure(with notebook: deprecated_Notebook) {
     func configure(with notebook: Notebook) {
         titleLabel.text = notebook.name
-        creationDateLabel.text = "Creado: \((notebook.creationDate as Date?)?.customStringLabel() ?? "ND")"
+        creationDateLabel.text = "\((notebook.creationDate as Date?)?.customStringLabel() ?? "Not available")"
     }
 }

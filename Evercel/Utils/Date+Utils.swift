@@ -15,6 +15,6 @@ extension Date {
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale(identifier: "en_US")
         
-        return "Creado: \(dateFormatter.string(from: self))"
+        return "\(dateFormatter.string(from: self))"
     }
 }

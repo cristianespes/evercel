@@ -75,6 +75,7 @@ class NoteDetailsViewController: UIViewController {
         case .new(let notebook):
             let note = Note(context: managedContext)
             note.title = titleTextField.text
+            note.creationDate = NSDate()
             note.text = descriptionTextView.text
             note.lastSeenDate = NSDate()
             
@@ -97,6 +98,7 @@ class NoteDetailsViewController: UIViewController {
         case .existing(let note):
             note.title = titleTextField.text
             note.text = descriptionTextView.text
+            //note.creationDate = creationDateLabel.text
             note.lastSeenDate = NSDate()
             
             do {
@@ -117,8 +119,8 @@ class NoteDetailsViewController: UIViewController {
         title = kind.title
         titleTextField.text = kind.note?.title
         //tagsLabel.text = note.tags?.joined(separator: ",")
-        creationDateLabel.text = "Creado: \((kind.note?.creationDate as Date?)?.customStringLabel() ?? "ND")"
-        lastSeenDateLabel.text = "Visto: \((kind.note?.lastSeenDate as Date?)?.customStringLabel() ?? "ND")"
+        creationDateLabel.text = "\((kind.note?.creationDate as Date?)?.customStringLabel() ?? "Not available")"
+        lastSeenDateLabel.text = "\((kind.note?.lastSeenDate as Date?)?.customStringLabel() ?? "Not available")"
         descriptionTextView.text = kind.note?.text ?? "Ingrese texto..."
     }
 

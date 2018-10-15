@@ -2,7 +2,7 @@
 //  Note+CoreDataClass.swift
 //  Evercel
 //
-//  Created by CRISTIAN ESPES on 09/10/2018.
+//  Created by CRISTIAN ESPES on 15/10/2018.
 //  Copyright © 2018 Cristian Espes. All rights reserved.
 //
 //
@@ -12,5 +12,5 @@ import CoreData
 
 @objc(Note)
 public class Note: NSManagedObject {
-
+    
 }

@@ -2,7 +2,7 @@
 //  Note+CoreDataProperties.swift
 //  Evercel
 //
-//  Created by CRISTIAN ESPES on 09/10/2018.
+//  Created by CRISTIAN ESPES on 15/10/2018.
 //  Copyright © 2018 Cristian Espes. All rights reserved.
 //
 //
@@ -17,10 +17,11 @@ extension Note {
         return NSFetchRequest<Note>(entityName: "Note")
     }
 
-    @NSManaged public var title: String?
-    @NSManaged public var text: String?
     @NSManaged public var creationDate: NSDate?
     @NSManaged public var lastSeenDate: NSDate?
+    @NSManaged public var text: String?
+    @NSManaged public var title: String?
+    @NSManaged public var image: NSData?
     @NSManaged public var notebook: Notebook?
 
 }
