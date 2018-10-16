@@ -27,6 +27,10 @@ class NewNotesListViewController: UIViewController {
     
     let transition = Animator()
     
+    enum Constants {
+        static let columns : CGFloat = 2
+    }
+    
     //init(notebook: deprecated_Notebook) {
     init(notebook: Notebook, coreDataStack: CoreDataStack) {
         self.notebook = notebook
@@ -43,11 +47,7 @@ class NewNotesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Notas"
-        self.view.backgroundColor = .white
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        setupUI()
         
         let nib = UINib(nibName: "NotesListCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "NotesListCollectionViewCell")
@@ -126,6 +126,17 @@ class NewNotesListViewController: UIViewController {
         
         return fetchRequest
     }
+    
+    func setupUI() {
+        title = "Notas"
+        
+        self.view.backgroundColor = .white
+        
+        collectionView.backgroundColor = .gainsboro
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+    }
 
 }
 
@@ -147,12 +158,12 @@ extension NewNotesListViewController: UICollectionViewDelegate {
         let note = notes[indexPath.row]
         let detailVC = NoteDetailsViewController(kind: .existing(note: note), managedContext: coreDataStack.managedContext)
         detailVC.delegate = self
-        //show(detailVC, sender: nil)
+        show(detailVC, sender: nil)
         
         // Custom animation
-        let navVC = UINavigationController(rootViewController: detailVC)
+        /*let navVC = UINavigationController(rootViewController: detailVC)
         navVC.transitioningDelegate = self
-        present(navVC, animated: true, completion: nil)
+        present(navVC, animated: true, completion: nil)*/
     }
 }
 

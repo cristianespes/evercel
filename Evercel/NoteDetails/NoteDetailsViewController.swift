@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 protocol NoteDetailsViewControllerDelegate: class {
     func didSaveNote()
@@ -37,6 +38,9 @@ class NoteDetailsViewController: UIViewController {
     
     weak var delegate: NoteDetailsViewControllerDelegate?
     
+    let locationManager = CLLocationManager()
+    
+    
     // MARK: - Initialization
     init(kind: Kind, managedContext: NSManagedObjectContext) {
         //self.note = note
@@ -53,7 +57,18 @@ class NoteDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupLocation()
         configure(with: kind)
+        
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
+    }
+    
+    private func setupLocation() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
     }
     
     private func configure(with kind: Kind) {
@@ -76,6 +91,7 @@ class NoteDetailsViewController: UIViewController {
         
         func addProperties(to note: Note) -> Note {
             note.title = titleTextField.text
+            note.tag = tagsLabel.text
             note.text = descriptionTextView.text
             
             let imageData: NSData?
@@ -95,9 +111,19 @@ class NoteDetailsViewController: UIViewController {
         case .new(let notebook):
             let note = Note(context: managedContext)
             note.title = titleTextField.text
+            note.tag = "Etiqueta aquí"//tagsLabel.text
             note.creationDate = NSDate()
             note.text = descriptionTextView.text
             note.lastSeenDate = NSDate()
+            
+            requestLocationPermission()
+//            note.latitude = Float(locationManager.location?.coordinate.latitude ?? 0)
+//            note.longitude = Float(locationManager.location?.coordinate.longitude ?? 0)
+            if let coordinates = locationManager.location?.coordinate {
+                note.latitude = Float(coordinates.latitude)
+                note.longitude = Float(coordinates.longitude)
+            }
+            print("latitude: \(note.latitude) / longitude: \(note.longitude)")
             
             // Settear la relación inversa
             // El note tiene que pertenecer a los notes de ... tal, sino puede saltar un error
@@ -173,18 +199,19 @@ class NoteDetailsViewController: UIViewController {
     private func configureValues() {
         title = kind.title
         titleTextField.text = kind.note?.title
-        //tagsLabel.text = note.tags?.joined(separator: ",")
+        tagsLabel.text = kind.note?.tag//note.tags?.joined(separator: ",")
         creationDateLabel.text = "\((kind.note?.creationDate as Date?)?.customStringLabel() ?? "Not available")"
         lastSeenDateLabel.text = "\((kind.note?.lastSeenDate as Date?)?.customStringLabel() ?? "Not available")"
         descriptionTextView.text = kind.note?.text ?? "Ingrese texto..."
         
         guard let imageData = kind.note?.image as Data? else {
             // TODO: CAMBIAR PARA MOSTRAR PLACE HOLDER
-            imageView.image = nil
+            imageView.image = UIImage(named: "120x180")
             return
         }
         imageView.image = UIImage(data: imageData)
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
     }
 
 }
@@ -241,5 +268,32 @@ extension NoteDetailsViewController: UIImagePickerControllerDelegate, UINavigati
         }
         
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension NoteDetailsViewController: CLLocationManagerDelegate {
+    
+    func requestLocationPermission() {
+        // Comprobar si está disponible el servicio de Localización
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.requestLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        /*if let location = locations.last {
+            print("latitude: \(location.coordinate.latitude), longitude: \(location.coordinate.longitude)")
+            switch kind {
+            case .new:
+                self.kind.note?.latitude = Float(location.coordinate.latitude)
+                self.kind.note?.longitude = Float(location.coordinate.longitude)
+            default:
+                break
+            }
+        }*/
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("No fue posible obtener la ubicación del usuario")
     }
 }

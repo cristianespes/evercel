@@ -14,7 +14,6 @@
 		19009B75216D56020018798E /* Notebook+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19009B73216D56020018798E /* Notebook+CoreDataClass.swift */; };
 		19009B76216D56020018798E /* Notebook+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19009B74216D56020018798E /* Notebook+CoreDataProperties.swift */; };
 		1906B5FC21751C5E00DBBF51 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B5FA21751C5E00DBBF51 /* Note+CoreDataClass.swift */; };
-		1906B5FD21751C5E00DBBF51 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B5FB21751C5E00DBBF51 /* Note+CoreDataProperties.swift */; };
 		1906B60121753AE700DBBF51 /* UIImage+ReSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B5FE21753AE700DBBF51 /* UIImage+ReSize.swift */; };
 		1906B60221753AE700DBBF51 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B5FF21753AE700DBBF51 /* UIImage+Alpha.swift */; };
 		1906B60321753AE700DBBF51 /* UIImage+RoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B60021753AE700DBBF51 /* UIImage+RoundCorner.swift */; };
@@ -29,6 +28,9 @@
 		1985DA83216C02C10056C67C /* deprecated_Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA82216C02C10056C67C /* deprecated_Note.swift */; };
 		1985DA86216C03BD0056C67C /* NoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA85216C03BD0056C67C /* NoteListViewController.swift */; };
 		1985DA8A216C0DA60056C67C /* NoteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA88216C0DA60056C67C /* NoteDetailsViewController.swift */; };
+		19D4146C2176505100EC4196 /* Color+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D4146B2176505100EC4196 /* Color+Utils.swift */; };
+		19D41471217659D600EC4196 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D4146F217659D600EC4196 /* Note+CoreDataProperties.swift */; };
+		19D4147321765D1000EC4196 /* LocationOfNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D4147221765D1000EC4196 /* LocationOfNote.swift */; };
 		19EE6FFC216FFE62000BF95A /* NewNotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE6FFA216FFE62000BF95A /* NewNotesListViewController.swift */; };
 		19EE6FFD216FFE62000BF95A /* NewNotesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19EE6FFB216FFE62000BF95A /* NewNotesListViewController.xib */; };
 		19EE700021700193000BF95A /* NotesListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE6FFE21700193000BF95A /* NotesListCollectionViewCell.swift */; };
@@ -44,7 +46,6 @@
 		19009B74216D56020018798E /* Notebook+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notebook+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1906B5F921751AEB00DBBF51 /* Evercel v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Evercel v2.xcdatamodel"; sourceTree = "<group>"; };
 		1906B5FA21751C5E00DBBF51 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
-		1906B5FB21751C5E00DBBF51 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1906B5FE21753AE700DBBF51 /* UIImage+ReSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ReSize.swift"; sourceTree = "<group>"; };
 		1906B5FF21753AE700DBBF51 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		1906B60021753AE700DBBF51 /* UIImage+RoundCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RoundCorner.swift"; sourceTree = "<group>"; };
@@ -61,6 +62,10 @@
 		1985DA82216C02C10056C67C /* deprecated_Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deprecated_Note.swift; sourceTree = "<group>"; };
 		1985DA85216C03BD0056C67C /* NoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewController.swift; sourceTree = "<group>"; };
 		1985DA88216C0DA60056C67C /* NoteDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsViewController.swift; sourceTree = "<group>"; };
+		19D4146B2176505100EC4196 /* Color+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Utils.swift"; sourceTree = "<group>"; };
+		19D4146D2176587800EC4196 /* Evercelv3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Evercelv3.xcdatamodel; sourceTree = "<group>"; };
+		19D4146F217659D600EC4196 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		19D4147221765D1000EC4196 /* LocationOfNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationOfNote.swift; sourceTree = "<group>"; };
 		19EE6FFA216FFE62000BF95A /* NewNotesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNotesListViewController.swift; sourceTree = "<group>"; };
 		19EE6FFB216FFE62000BF95A /* NewNotesListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewNotesListViewController.xib; sourceTree = "<group>"; };
 		19EE6FFE21700193000BF95A /* NotesListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -85,6 +90,7 @@
 				1906B5FE21753AE700DBBF51 /* UIImage+ReSize.swift */,
 				1906B60021753AE700DBBF51 /* UIImage+RoundCorner.swift */,
 				19009B64216D2FB80018798E /* Date+Utils.swift */,
+				19D4146B2176505100EC4196 /* Color+Utils.swift */,
 				19009B66216D38580018798E /* CoreDataStack.swift */,
 				1906B6042175459000DBBF51 /* Animator.swift */,
 			);
@@ -136,12 +142,13 @@
 		1985DA7F216BFC770056C67C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				19D4146F217659D600EC4196 /* Note+CoreDataProperties.swift */,
 				1906B5FA21751C5E00DBBF51 /* Note+CoreDataClass.swift */,
-				1906B5FB21751C5E00DBBF51 /* Note+CoreDataProperties.swift */,
-				19009B73216D56020018798E /* Notebook+CoreDataClass.swift */,
 				19009B74216D56020018798E /* Notebook+CoreDataProperties.swift */,
+				19009B73216D56020018798E /* Notebook+CoreDataClass.swift */,
 				1985DA80216BFC850056C67C /* deprecated_Notebook.swift */,
 				1985DA82216C02C10056C67C /* deprecated_Note.swift */,
+				19D4147221765D1000EC4196 /* LocationOfNote.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -263,13 +270,15 @@
 				1985DA69216BEF300056C67C /* AppDelegate.swift in Sources */,
 				1906B60221753AE700DBBF51 /* UIImage+Alpha.swift in Sources */,
 				1985DA81216BFC850056C67C /* deprecated_Notebook.swift in Sources */,
+				19D4147321765D1000EC4196 /* LocationOfNote.swift in Sources */,
 				19009B65216D2FB80018798E /* Date+Utils.swift in Sources */,
 				1906B60321753AE700DBBF51 /* UIImage+RoundCorner.swift in Sources */,
 				1906B5FC21751C5E00DBBF51 /* Note+CoreDataClass.swift in Sources */,
 				19009B75216D56020018798E /* Notebook+CoreDataClass.swift in Sources */,
 				1985DA8A216C0DA60056C67C /* NoteDetailsViewController.swift in Sources */,
 				1985DA7E216BFB140056C67C /* NotebookListCell.swift in Sources */,
-				1906B5FD21751C5E00DBBF51 /* Note+CoreDataProperties.swift in Sources */,
+				19D41471217659D600EC4196 /* Note+CoreDataProperties.swift in Sources */,
+				19D4146C2176505100EC4196 /* Color+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +427,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9B4U9692J;
 				INFOPLIST_FILE = Evercel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -436,6 +446,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W9B4U9692J;
 				INFOPLIST_FILE = Evercel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -474,10 +485,11 @@
 		19009B68216D3CF80018798E /* Evercel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				19D4146D2176587800EC4196 /* Evercelv3.xcdatamodel */,
 				1906B5F921751AEB00DBBF51 /* Evercel v2.xcdatamodel */,
 				19009B69216D3CF80018798E /* Evercel.xcdatamodel */,
 			);
-			currentVersion = 1906B5F921751AEB00DBBF51 /* Evercel v2.xcdatamodel */;
+			currentVersion = 19D4146D2176587800EC4196 /* Evercelv3.xcdatamodel */;
 			path = Evercel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
