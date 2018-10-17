@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,14 +19,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEj-R0-703">
-                        <rect key="frame" x="28.5" y="64.5" width="43" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="cEj-R0-703">
+                        <rect key="frame" x="8" y="8" width="84" height="105"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPc-Gp-Y43">
-                        <rect key="frame" x="29" y="109" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="vPc-Gp-Y43">
+                        <rect key="frame" x="8" y="121" width="84" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -33,10 +34,15 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="vPc-Gp-Y43" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="8" id="5DH-aI-3ga"/>
+                <constraint firstItem="cEj-R0-703" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" constant="8" id="IV1-Td-g6A"/>
                 <constraint firstItem="cEj-R0-703" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="KbL-pZ-J1u"/>
-                <constraint firstItem="cEj-R0-703" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="UjL-CH-7cr"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="cEj-R0-703" secondAttribute="trailing" constant="8" id="at0-rD-HWa"/>
                 <constraint firstItem="vPc-Gp-Y43" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="bfT-hX-8Re"/>
-                <constraint firstAttribute="bottom" secondItem="vPc-Gp-Y43" secondAttribute="bottom" constant="20" id="hlT-0c-oVb"/>
+                <constraint firstItem="cEj-R0-703" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="8" id="d7e-nh-oTf"/>
+                <constraint firstItem="vPc-Gp-Y43" firstAttribute="top" secondItem="cEj-R0-703" secondAttribute="bottom" constant="8" id="fJv-Pj-Ox8"/>
+                <constraint firstAttribute="bottom" secondItem="vPc-Gp-Y43" secondAttribute="bottom" constant="8" id="hlT-0c-oVb"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="vPc-Gp-Y43" secondAttribute="trailing" constant="8" id="zNr-FM-mLl"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="157" height="182"/>
