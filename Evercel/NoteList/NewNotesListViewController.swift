@@ -16,22 +16,19 @@ class NewNotesListViewController: UIViewController {
     
     // MARK: - Properties
     let notebook: Notebook
-    //let managedContext: NSManagedObjectContext
     let coreDataStack: CoreDataStack
-    
     var notes: [Note] {
         didSet {
             collectionView.reloadData()
         }
     }
-    
     let transition = Animator()
     
     enum Constants {
         static let columns : CGFloat = 2
     }
     
-    //init(notebook: deprecated_Notebook) {
+    // MARK: - Initialization
     init(notebook: Notebook, coreDataStack: CoreDataStack) {
         self.notebook = notebook
         self.notes = (notebook.notes?.array as? [Note]) ?? []
@@ -44,6 +41,7 @@ class NewNotesListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lyfe Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +55,7 @@ class NewNotesListViewController: UIViewController {
         self.navigationItem.rightBarButtonItems = [addButtonItem, exportButtonItem]
     }
     
+    // MARK: - Helper methods
     @objc private func addNote() {
         let newNoteVC = NoteDetailsViewController(kind: .new(notebook: notebook), managedContext: coreDataStack.managedContext)
         newNoteVC.delegate = self
@@ -140,6 +139,7 @@ class NewNotesListViewController: UIViewController {
 
 }
 
+// MARK: - UICollectionViewDataSource
 extension NewNotesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return notes.count
@@ -153,35 +153,43 @@ extension NewNotesListViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension NewNotesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let note = notes[indexPath.row]
         let detailVC = NoteDetailsViewController(kind: .existing(note: note), managedContext: coreDataStack.managedContext)
         detailVC.delegate = self
-        show(detailVC, sender: nil)
+        //show(detailVC, sender: nil)
         
         // Custom animation
-        /*let navVC = UINavigationController(rootViewController: detailVC)
+        let navVC = UINavigationController(rootViewController: detailVC)
         navVC.transitioningDelegate = self
-        present(navVC, animated: true, completion: nil)*/
+        present(navVC, animated: true, completion: nil)
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension NewNotesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 150)
     }
 }
 
+// MARK: - NoteDetailsViewControllerProtocol implementation
 extension NewNotesListViewController: NoteDetailsViewControllerDelegate {
     func didSaveNote() {
         notes = (notebook.notes?.array as? [Note]) ?? []
     }
 }
 
-// USAR LA ANIMACION DEL COMMIT DEL PROFESOR
+// MARK: - Custom Animation - UIViewControllerTransitioningDelegate
 extension NewNotesListViewController : UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let indexPath = (collectionView.indexPathsForSelectedItems?.first!)!
+        let cell = collectionView.cellForItem(at: indexPath)
+        transition.originFrame = cell!.superview!.convert(cell!.frame, to: nil)
+        transition.presenting = true
+        
         return transition
     }
     
