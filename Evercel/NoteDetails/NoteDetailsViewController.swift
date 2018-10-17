@@ -10,10 +10,12 @@ import UIKit
 import CoreData
 import CoreLocation
 
+// MARK: - NoteDetailsViewControllerProtocol
 protocol NoteDetailsViewControllerDelegate: class {
     func didSaveNote()
 }
 
+// MARK:- NoteDetailsViewController class
 class NoteDetailsViewController: UIViewController {
     
     // MARK: - Outlets
@@ -25,25 +27,19 @@ class NoteDetailsViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     
     // MARK: - Properties
-    //let note: Note
-    
     enum Kind {
         case new(notebook: Notebook)
         case existing(note: Note)
     }
     
     let managedContext : NSManagedObjectContext
-    
     let kind: Kind
-    
-    weak var delegate: NoteDetailsViewControllerDelegate?
-    
     let locationManager = CLLocationManager()
+    weak var delegate: NoteDetailsViewControllerDelegate?
     
     
     // MARK: - Initialization
     init(kind: Kind, managedContext: NSManagedObjectContext) {
-        //self.note = note
         self.kind = kind
         self.managedContext = managedContext
         
@@ -54,11 +50,12 @@ class NoteDetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupLocation()
-        configure(with: kind)
+        configure()
         
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
@@ -71,20 +68,14 @@ class NoteDetailsViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
     }
     
-    private func configure(with kind: Kind) {
-        switch kind {
-        case .new:
-            let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .save
-                , target: self, action: #selector(saveNote))
-            self.navigationItem.rightBarButtonItem = saveButtonItem
-            let cancelButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
-            navigationItem.leftBarButtonItem = cancelButtonItem
-            configureValues()
-        case .existing:
-            let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveNote))
-            self.navigationItem.rightBarButtonItem = saveButtonItem
-            configureValues()
-        }
+    private func configure() {
+        let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .save
+            , target: self, action: #selector(saveNote))
+        self.navigationItem.rightBarButtonItem = saveButtonItem
+        let cancelButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+        navigationItem.leftBarButtonItem = cancelButtonItem
+        
+        configureValues()
     }
 
     @objc private func saveNote() {
@@ -101,7 +92,6 @@ class NoteDetailsViewController: UIViewController {
             } else {
                 imageData = nil
             }
-            
             note.image = imageData
             
             return note
@@ -110,11 +100,15 @@ class NoteDetailsViewController: UIViewController {
         switch kind {
         case .new(let notebook):
             let note = Note(context: managedContext)
-            note.title = titleTextField.text
-            note.tag = "Etiqueta aquí"//tagsLabel.text
-            note.creationDate = NSDate()
-            note.text = descriptionTextView.text
-            note.lastSeenDate = NSDate()
+            let modifiedNote = addProperties(to: note)
+            modifiedNote.creationDate = NSDate()
+            modifiedNote.notebook = notebook
+            modifiedNote.tag = "Etiqueta aquí"//tagsLabel.text
+            
+            if let notes = notebook.notes?.mutableCopy() as? NSMutableOrderedSet {
+                notes.add(note)
+                notebook.notes = notes
+            }
             
             requestLocationPermission()
 //            note.latitude = Float(locationManager.location?.coordinate.latitude ?? 0)
@@ -143,12 +137,7 @@ class NoteDetailsViewController: UIViewController {
             print("Error: \(error.localizedDescription)")
         }
         
-        switch kind {
-        case .existing:
-            navigationController?.popViewController(animated: true)
-        case .new:
-            dismiss(animated: true, completion: nil)
-        }
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func cancel() {
@@ -181,7 +170,6 @@ class NoteDetailsViewController: UIViewController {
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
-        
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -190,10 +178,7 @@ class NoteDetailsViewController: UIViewController {
         imagePicker.sourceType = .camera
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
-        
         present(imagePicker, animated: true, completion: nil)
-        
-        
     }
     
     private func configureValues() {
@@ -216,6 +201,7 @@ class NoteDetailsViewController: UIViewController {
 
 }
 
+// MARK: - NoteDetailsViewController.Kind extension
 private extension NoteDetailsViewController.Kind {
     var note: Note? {
         guard case let .existing(note) = self else { return nil }
@@ -232,6 +218,7 @@ private extension NoteDetailsViewController.Kind {
     }
 }
 
+// MARK: - UIImagePickerControllerDelegate & related methods
 extension NoteDetailsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
