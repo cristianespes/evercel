@@ -34,7 +34,7 @@ extension LocationOfNote: MKAnnotation {
         }
     }
     
-    var date : String? {
+    var subtitle: String? {
         get {
             return _date
         }

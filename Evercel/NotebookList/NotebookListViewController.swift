@@ -160,14 +160,47 @@ extension NotebookListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let notebook = fetchedResultsController.object(at: indexPath)
+        
 //        let notesListVC = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
-//
 //        show(notesListVC, sender: nil)
         
         
-        let notesMapVC = NotesMapViewController(notebook: notebook, coreDataStack: coreDataStack)
-
-        show(notesMapVC, sender: nil)
+        //let notesMapVC = NotesMapViewController(notebook: notebook, coreDataStack: coreDataStack)
+        //show(notesMapVC, sender: nil)
+        
+    //navigationController?.pushViewController(PresentNotesViewController(notebook: notebook, coreDataStack: coreDataStack), animated: true)
+        
+        
+        
+        
+        
+//        let tabBarController = UITabBarController()
+//
+//        let notesListVC = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
+//        let notesMapVC = NotesMapViewController(notebook: notebook, coreDataStack: coreDataStack)
+        
+//        let notesListNC = UINavigationController(rootViewController: notesListVC)
+//        let notesMapNC = UINavigationController(rootViewController: notesMapVC)
+        
+//        tabBarController.viewControllers = [notesListVC, notesMapVC]
+//
+//        tabBarController.navigationController?.isNavigationBarHidden = true
+//        tabBarController.navigationController?.isToolbarHidden = true
+//
+//        tabBarController.tabBar.items![0].title = notesListVC.title?.uppercased()
+//        tabBarController.tabBar.items![1].title = notesMapVC.title?.uppercased()
+//        tabBarController.tabBar.items![0].image = UIImage(named: "ShieldIcon")
+//        tabBarController.tabBar.items![1].image = UIImage(named: "ShieldIcon")
+        
+        //show(tabBarController, sender: nil)
+        
+        
+        //navigationController?.pushViewController(tabBarController, animated: true)
+        
+        
+        show(PresentNotesVC(notebook: notebook, coreDataStack: coreDataStack), sender: nil)
+        
+        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

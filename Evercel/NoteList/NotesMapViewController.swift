@@ -28,6 +28,8 @@ class NotesMapViewController: UIViewController {
         self.notes = (notebook.notes?.array as? [Note]) ?? []
         
         super.init(nibName: nil, bundle: nil)
+        
+        title = "Mapa"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,20 +40,20 @@ class NotesMapViewController: UIViewController {
     // MARK: - Lyfe Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         super.viewDidLoad()
-        let myHome = CLLocationCoordinate2D(latitude: 41.646777, longitude: -0.866051)
+        
+        setupUI()
+        
+        let myHome = CLLocationCoordinate2D(latitude: 37.78583526611328, longitude: -122.40641784667969)
+        //let myHome = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        //let myHome = CLLocationCoordinate2D(latitude: 41.646777, longitude: -0.866051)
         let regionRadius: CLLocationDistance = 1000
         let region = MKCoordinateRegion(center: myHome, latitudinalMeters: regionRadius, longitudinalMeters: 1000)
         
         mapView.setRegion(region, animated: true)
-        
-        setupUI()
     }
     
     func setupUI() {
-        title = "Mapa de notas"
-        
         self.view.backgroundColor = .white
         
         mapView.delegate = self
@@ -62,26 +64,23 @@ class NotesMapViewController: UIViewController {
         notes.forEach { note in
             let noteLocalize = LocationOfNote(title: note.title!, date: ((note.creationDate as Date?)?.customStringLabel())!, location: CLLocationCoordinate2D(latitude: note.latitude, longitude: note.longitude))
             
+            //print("latitude: \(note.latitude), longitude: \(note.longitude)")
+            
             locationsOfNote.append(noteLocalize)
         }
+        
+        let noteLocalize1 = LocationOfNote(title: "Prueba1", date: "Fecha1", location: CLLocationCoordinate2D(latitude: 37.785021, longitude: -122.402974))
+        locationsOfNote.append(noteLocalize1)
+        
+        let noteLocalize2 = LocationOfNote(title: "Prueba2", date: "Fecha2", location: CLLocationCoordinate2D(latitude: 37.782054, longitude: -122.40527))
+        locationsOfNote.append(noteLocalize2)
+        
+        let noteLocalize3 = LocationOfNote(title: "Prueba3", date: "Fecha3", location: CLLocationCoordinate2D(latitude: 37.78107, longitude: -122.410216))
+        locationsOfNote.append(noteLocalize3)
         
 //        let myHome = LocationOfNote(title: "My Home", date: "Para poder dormir", location: CLLocationCoordinate2D(latitude: 41.646777, longitude: -0.866051))
 //        locationsOfNote.append(myHome)
     }
-    
-    /*func configure(with item: Note) {
-        //backgroundColor = .burlywood
-        titleLabel.text = item.title
-        if let data = item.image as Data? {
-            imageView.image = UIImage(data: data)
-            titleLabel.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.6)
-            creationDateLabel.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.6)
-        } else {
-            imageView.image = UIImage(named: "120x180")
-        }
-        imageView.contentMode = .scaleAspectFill
-        creationDateLabel.text = (item.creationDate as Date?)?.customStringLabel()
-    }*/
 
 }
 
@@ -118,5 +117,9 @@ extension NotesMapViewController: MKMapViewDelegate {
         
         return annotacionView
     }
+    
+//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//        print("Pulsado chincheta: \(view.annotation?.title) ")
+//    }
     
 }

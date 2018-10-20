@@ -35,6 +35,8 @@ class NewNotesListViewController: UIViewController {
         self.coreDataStack = coreDataStack
         
         super.init(nibName: nil, bundle: nil)
+        
+        title = "Listado"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,7 +54,7 @@ class NewNotesListViewController: UIViewController {
         
         let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNote))
         let exportButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(exportCsv))
-        self.navigationItem.rightBarButtonItems = [addButtonItem, exportButtonItem]
+        navigationItem.rightBarButtonItems = [addButtonItem, exportButtonItem]
     }
     
     // MARK: - Helper methods
@@ -127,8 +129,6 @@ class NewNotesListViewController: UIViewController {
     }
     
     func setupUI() {
-        title = "Listado de Notas"
-        
         self.view.backgroundColor = .white
         
         collectionView.backgroundColor = .burlywood

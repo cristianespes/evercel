@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Necesitamos acceso a su ubicación para poder localización de la nota</string>
+	<string>Esta aplicación requiere acceso a su ubicación para poder localización de la nota</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Necesitamos acceso a galería para que pueda acceder a las imágenes</string>
+	<string>Esta aplicación requiere acceso a galería para que pueda acceder a las imágenes</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Necesitamos acceso a su cámara para que pueda realizar fotografías</string>
+	<string>Esta aplicación requiere acceso a su cámara para que pueda realizar fotografías</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PresentNotesVC" customModule="Evercel" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="8AU-b9-hhk" id="Vyy-5N-2Bn"/>
+                <outlet property="segmentedControl" destination="Jzf-ad-GIn" id="kRx-0Y-VTX"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8AU-b9-hhk">
+                    <rect key="frame" x="0.0" y="68" width="375" height="599"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Jzf-ad-GIn">
+                    <rect key="frame" x="25" y="30" width="325" height="29"/>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                    </segments>
+                    <connections>
+                        <action selector="switchViews:" destination="-1" eventType="valueChanged" id="Ghv-0Y-SJe"/>
+                    </connections>
+                </segmentedControl>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Jzf-ad-GIn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="45k-mM-8UU"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8AU-b9-hhk" secondAttribute="trailing" id="62y-DU-bNx"/>
+                <constraint firstItem="Jzf-ad-GIn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Q9a-rM-Hcm"/>
+                <constraint firstItem="8AU-b9-hhk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QhO-xK-e0o"/>
+                <constraint firstItem="8AU-b9-hhk" firstAttribute="top" secondItem="Jzf-ad-GIn" secondAttribute="bottom" constant="10" id="R0o-Bx-faw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jzf-ad-GIn" secondAttribute="trailing" constant="25" id="lAO-2D-CSq"/>
+                <constraint firstItem="Jzf-ad-GIn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="pPR-fc-wuO"/>
+                <constraint firstAttribute="bottom" secondItem="8AU-b9-hhk" secondAttribute="bottom" id="rAn-wk-oul"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>
