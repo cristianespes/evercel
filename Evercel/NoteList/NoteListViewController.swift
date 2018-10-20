@@ -85,6 +85,7 @@ class NoteListViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        tableView.tableFooterView = UIView()
     }
 }
 
@@ -105,7 +106,6 @@ extension NoteListViewController: UITableViewDataSource {
 extension NoteListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let note = notes[indexPath.row]
-        //let detailVC = NoteDetailsViewController(note: notes[indexPath.row])
         let detailVC = NoteDetailsViewController(kind: .existing(note: note), managedContext: managedContext)
         detailVC.delegate = self
         show(detailVC, sender: nil)

@@ -127,11 +127,11 @@ class NewNotesListViewController: UIViewController {
     }
     
     func setupUI() {
-        title = "Notas"
+        title = "Listado de Notas"
         
         self.view.backgroundColor = .white
         
-        collectionView.backgroundColor = .gainsboro
+        collectionView.backgroundColor = .burlywood
         
         collectionView.dataSource = self
         collectionView.delegate = self

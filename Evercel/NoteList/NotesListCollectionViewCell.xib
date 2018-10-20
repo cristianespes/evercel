@@ -19,6 +19,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a3G-m3-fXE">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="cEj-R0-703">
                         <rect key="frame" x="8" y="8" width="84" height="105"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -34,6 +37,8 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="a3G-m3-fXE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0zt-uN-dwl"/>
+                <constraint firstItem="a3G-m3-fXE" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4XY-oa-vAb"/>
                 <constraint firstItem="vPc-Gp-Y43" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="8" id="5DH-aI-3ga"/>
                 <constraint firstItem="cEj-R0-703" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" constant="8" id="IV1-Td-g6A"/>
                 <constraint firstItem="cEj-R0-703" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="KbL-pZ-J1u"/>
@@ -42,12 +47,15 @@
                 <constraint firstItem="cEj-R0-703" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="8" id="d7e-nh-oTf"/>
                 <constraint firstItem="vPc-Gp-Y43" firstAttribute="top" secondItem="cEj-R0-703" secondAttribute="bottom" constant="8" id="fJv-Pj-Ox8"/>
                 <constraint firstAttribute="bottom" secondItem="vPc-Gp-Y43" secondAttribute="bottom" constant="8" id="hlT-0c-oVb"/>
+                <constraint firstAttribute="trailing" secondItem="a3G-m3-fXE" secondAttribute="trailing" id="kVi-h4-Ryg"/>
+                <constraint firstAttribute="bottom" secondItem="a3G-m3-fXE" secondAttribute="bottom" id="sDy-q2-qZs"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="vPc-Gp-Y43" secondAttribute="trailing" constant="8" id="zNr-FM-mLl"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="157" height="182"/>
             <connections>
                 <outlet property="creationDateLabel" destination="vPc-Gp-Y43" id="zcZ-mv-oR1"/>
+                <outlet property="imageView" destination="a3G-m3-fXE" id="kIt-3p-dNb"/>
                 <outlet property="titleLabel" destination="cEj-R0-703" id="iVc-mG-g8b"/>
             </connections>
             <point key="canvasLocation" x="222.40000000000001" y="210.04497751124438"/>

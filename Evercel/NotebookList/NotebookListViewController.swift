@@ -55,6 +55,7 @@ class NotebookListViewController: UIViewController {
         
         super.viewDidLoad()
         
+        tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -158,23 +159,30 @@ extension NotebookListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let notebook = model[indexPath.row]
-//        let notesListVC = NoteListViewController(notebook: notebook)
-//        show(notesListVC, sender: nil)
-        //navigationController?.show(notesListVC, sender: nil) // Es lo mismo, pero no es necesario que exista un navC
-        
-        //let notebook = dataSource[indexPath.row] as! Notebook
         let notebook = fetchedResultsController.object(at: indexPath)
-        //let notesListVC = NoteListViewController(notebook: notebook, managedContext: managedContext)
+//        let notesListVC = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
+//
+//        show(notesListVC, sender: nil)
         
-        let notesListVC = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
         
-        show(notesListVC, sender: nil)
+        let notesMapVC = NotesMapViewController(notebook: notebook, coreDataStack: coreDataStack)
+
+        show(notesMapVC, sender: nil)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let sectionInfo = fetchedResultsController.sections?[section]
-        return sectionInfo?.name
+        
+        guard let dateString = sectionInfo?.name else { return sectionInfo?.name }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        let date = dateFormatter.date(from: dateString)
+        //print("date: \(date?.customStringLabel())")
+//        dateFormatter.dateFormat = "dd/MM/yyyy"
+//        let sectionDate = dateFormatter.string(from:date!)
+        
+        return date?.customStringLabel()
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

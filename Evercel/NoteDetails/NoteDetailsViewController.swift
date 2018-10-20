@@ -114,8 +114,8 @@ class NoteDetailsViewController: UIViewController {
 //            note.latitude = Float(locationManager.location?.coordinate.latitude ?? 0)
 //            note.longitude = Float(locationManager.location?.coordinate.longitude ?? 0)
             if let coordinates = locationManager.location?.coordinate {
-                note.latitude = Float(coordinates.latitude)
-                note.longitude = Float(coordinates.longitude)
+                note.latitude = coordinates.latitude
+                note.longitude = coordinates.longitude
             }
             print("latitude: \(note.latitude) / longitude: \(note.longitude)")
             

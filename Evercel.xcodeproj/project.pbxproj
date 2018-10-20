@@ -18,6 +18,9 @@
 		1906B60221753AE700DBBF51 /* UIImage+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B5FF21753AE700DBBF51 /* UIImage+Alpha.swift */; };
 		1906B60321753AE700DBBF51 /* UIImage+RoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B60021753AE700DBBF51 /* UIImage+RoundCorner.swift */; };
 		1906B6052175459000DBBF51 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B6042175459000DBBF51 /* Animator.swift */; };
+		191FA01A217B36CB00B4E7C2 /* NotesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191FA018217B36CB00B4E7C2 /* NotesMapViewController.swift */; };
+		191FA01B217B36CB00B4E7C2 /* NotesMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 191FA019217B36CB00B4E7C2 /* NotesMapViewController.xib */; };
+		191FA048217B52A500B4E7C2 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191FA046217B52A500B4E7C2 /* Note+CoreDataProperties.swift */; };
 		1985DA69216BEF300056C67C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA68216BEF300056C67C /* AppDelegate.swift */; };
 		1985DA6E216BEF300056C67C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1985DA6C216BEF300056C67C /* Main.storyboard */; };
 		1985DA70216BEF320056C67C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1985DA6F216BEF320056C67C /* Assets.xcassets */; };
@@ -29,7 +32,6 @@
 		1985DA86216C03BD0056C67C /* NoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA85216C03BD0056C67C /* NoteListViewController.swift */; };
 		1985DA8A216C0DA60056C67C /* NoteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1985DA88216C0DA60056C67C /* NoteDetailsViewController.swift */; };
 		19D4146C2176505100EC4196 /* Color+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D4146B2176505100EC4196 /* Color+Utils.swift */; };
-		19D41471217659D600EC4196 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D4146F217659D600EC4196 /* Note+CoreDataProperties.swift */; };
 		19D4147321765D1000EC4196 /* LocationOfNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D4147221765D1000EC4196 /* LocationOfNote.swift */; };
 		19EE6FFC216FFE62000BF95A /* NewNotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE6FFA216FFE62000BF95A /* NewNotesListViewController.swift */; };
 		19EE6FFD216FFE62000BF95A /* NewNotesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19EE6FFB216FFE62000BF95A /* NewNotesListViewController.xib */; };
@@ -50,6 +52,9 @@
 		1906B5FF21753AE700DBBF51 /* UIImage+Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Alpha.swift"; sourceTree = "<group>"; };
 		1906B60021753AE700DBBF51 /* UIImage+RoundCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RoundCorner.swift"; sourceTree = "<group>"; };
 		1906B6042175459000DBBF51 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		191FA018217B36CB00B4E7C2 /* NotesMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesMapViewController.swift; sourceTree = "<group>"; };
+		191FA019217B36CB00B4E7C2 /* NotesMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesMapViewController.xib; sourceTree = "<group>"; };
+		191FA046217B52A500B4E7C2 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1985DA65216BEF300056C67C /* Evercel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Evercel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1985DA68216BEF300056C67C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1985DA6D216BEF300056C67C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,7 +69,6 @@
 		1985DA88216C0DA60056C67C /* NoteDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsViewController.swift; sourceTree = "<group>"; };
 		19D4146B2176505100EC4196 /* Color+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Utils.swift"; sourceTree = "<group>"; };
 		19D4146D2176587800EC4196 /* Evercelv3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Evercelv3.xcdatamodel; sourceTree = "<group>"; };
-		19D4146F217659D600EC4196 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		19D4147221765D1000EC4196 /* LocationOfNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationOfNote.swift; sourceTree = "<group>"; };
 		19EE6FFA216FFE62000BF95A /* NewNotesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNotesListViewController.swift; sourceTree = "<group>"; };
 		19EE6FFB216FFE62000BF95A /* NewNotesListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewNotesListViewController.xib; sourceTree = "<group>"; };
@@ -142,7 +146,7 @@
 		1985DA7F216BFC770056C67C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				19D4146F217659D600EC4196 /* Note+CoreDataProperties.swift */,
+				191FA046217B52A500B4E7C2 /* Note+CoreDataProperties.swift */,
 				1906B5FA21751C5E00DBBF51 /* Note+CoreDataClass.swift */,
 				19009B74216D56020018798E /* Notebook+CoreDataProperties.swift */,
 				19009B73216D56020018798E /* Notebook+CoreDataClass.swift */,
@@ -161,6 +165,8 @@
 				19EE6FFB216FFE62000BF95A /* NewNotesListViewController.xib */,
 				19EE6FFE21700193000BF95A /* NotesListCollectionViewCell.swift */,
 				19EE6FFF21700193000BF95A /* NotesListCollectionViewCell.xib */,
+				191FA018217B36CB00B4E7C2 /* NotesMapViewController.swift */,
+				191FA019217B36CB00B4E7C2 /* NotesMapViewController.xib */,
 			);
 			path = NoteList;
 			sourceTree = "<group>";
@@ -241,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191FA01B217B36CB00B4E7C2 /* NotesMapViewController.xib in Resources */,
 				19009B62216D2C290018798E /* NoteDetailsViewController.xib in Resources */,
 				1985DA73216BEF320056C67C /* LaunchScreen.storyboard in Resources */,
 				19EE700121700193000BF95A /* NotesListCollectionViewCell.xib in Resources */,
@@ -261,6 +268,8 @@
 				19EE6FFC216FFE62000BF95A /* NewNotesListViewController.swift in Sources */,
 				1906B60121753AE700DBBF51 /* UIImage+ReSize.swift in Sources */,
 				19009B6A216D3CF80018798E /* Evercel.xcdatamodeld in Sources */,
+				191FA048217B52A500B4E7C2 /* Note+CoreDataProperties.swift in Sources */,
+				191FA01A217B36CB00B4E7C2 /* NotesMapViewController.swift in Sources */,
 				1985DA83216C02C10056C67C /* deprecated_Note.swift in Sources */,
 				1985DA7C216BF1FC0056C67C /* NotebookListViewController.swift in Sources */,
 				1985DA86216C03BD0056C67C /* NoteListViewController.swift in Sources */,
@@ -277,7 +286,6 @@
 				19009B75216D56020018798E /* Notebook+CoreDataClass.swift in Sources */,
 				1985DA8A216C0DA60056C67C /* NoteDetailsViewController.swift in Sources */,
 				1985DA7E216BFB140056C67C /* NotebookListCell.swift in Sources */,
-				19D41471217659D600EC4196 /* Note+CoreDataProperties.swift in Sources */,
 				19D4146C2176505100EC4196 /* Color+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

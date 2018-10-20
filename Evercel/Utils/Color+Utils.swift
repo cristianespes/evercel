@@ -9,6 +9,6 @@
 import UIKit
 
 extension UIColor {
-    static let burlywood = UIColor(red: 222/255, green: 184/255, blue: 135/255, alpha: 1)
+    static let burlywood = UIColor(red: 222/255, green: 184/255, blue: 135/255, alpha: 0.5)
     static let gainsboro = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)
 }

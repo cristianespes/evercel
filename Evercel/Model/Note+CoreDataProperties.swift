@@ -2,7 +2,7 @@
 //  Note+CoreDataProperties.swift
 //  Evercel
 //
-//  Created by CRISTIAN ESPES on 16/10/2018.
+//  Created by CRISTIAN ESPES on 20/10/2018.
 //  Copyright © 2018 Cristian Espes. All rights reserved.
 //
 //
@@ -20,11 +20,11 @@ extension Note {
     @NSManaged public var creationDate: NSDate?
     @NSManaged public var image: NSData?
     @NSManaged public var lastSeenDate: NSDate?
+    @NSManaged public var latitude: Double
+    @NSManaged public var longitude: Double
+    @NSManaged public var tag: String?
     @NSManaged public var text: String?
     @NSManaged public var title: String?
-    @NSManaged public var tag: String?
-    @NSManaged public var latitude: Float
-    @NSManaged public var longitude: Float
     @NSManaged public var notebook: Notebook?
 
 }

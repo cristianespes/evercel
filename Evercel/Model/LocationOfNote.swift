@@ -10,33 +10,33 @@ import UIKit
 import MapKit
 
 class LocationOfNote: NSObject {
-	let name: String
-	let info: String
-    let location: CLLocationCoordinate2D
+	let _title: String
+	let _date: String
+    let _location: CLLocationCoordinate2D
 
-    init(name: String, info: String, location: CLLocationCoordinate2D) {
-		self.name = name
-		self.info = info
-        self.location = location
+    init(title: String, date: String, location: CLLocationCoordinate2D) {
+		_title = title
+		_date = date
+        _location = location
 	}
 }
 
 extension LocationOfNote: MKAnnotation {
     var coordinate: CLLocationCoordinate2D {
         get {
-            return location
+            return _location
         }
     }
     
     var title: String? {
         get {
-            return name
+            return _title
         }
     }
     
-    var subtitle : String? {
+    var date : String? {
         get {
-            return info
+            return _date
         }
     }
 }
