@@ -21,6 +21,6 @@ extension Note {
         let exportedText = text ?? ""
         let exportedCreationDate = (creationDate as Date?)?.customStringLabel() ?? "Not available"
         
-        return "\(exportedCreationDate),\(exportedTitle),\(exportedText)"
+        return "\(exportedCreationDate),\n\(exportedTitle),\n\(exportedText).\n\n"
     }
 }

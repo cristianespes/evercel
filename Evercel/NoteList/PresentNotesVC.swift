@@ -47,6 +47,8 @@ class PresentNotesVC: UIViewController {
         
         //navigationItem.title = "Notas"
         title = "Notas"
+        
+        navigationController?.navigationBar.isTranslucent = false
 
         setupUI()
         displayCurrentTab(0)
