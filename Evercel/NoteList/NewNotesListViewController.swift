@@ -52,81 +52,81 @@ class NewNotesListViewController: UIViewController {
         let nib = UINib(nibName: "NotesListCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "NotesListCollectionViewCell")
         
-        let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNote))
-        let exportButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(exportCsv))
-        navigationItem.rightBarButtonItems = [addButtonItem, exportButtonItem]
+//        let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNote))
+//        let exportButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(exportCsv))
+//        navigationItem.rightBarButtonItems = [addButtonItem, exportButtonItem]
     }
     
     // MARK: - Helper methods
-    @objc private func addNote() {
-        let newNoteVC = NoteDetailsViewController(kind: .new(notebook: notebook), managedContext: coreDataStack.managedContext)
-        newNoteVC.delegate = self
-        let navVC = UINavigationController(rootViewController: newNoteVC)
-        self.present(navVC, animated: true, completion: nil)
-    }
+//    @objc private func addNote() {
+//        let newNoteVC = NoteDetailsViewController(kind: .new(notebook: notebook), managedContext: coreDataStack.managedContext)
+//        newNoteVC.delegate = self
+//        let navVC = UINavigationController(rootViewController: newNoteVC)
+//        self.present(navVC, animated: true, completion: nil)
+//    }
+//
+//    @objc private func exportCsv() {
+//        coreDataStack.storeContainer.performBackgroundTask { [unowned self] (context) in
+//            var results: [Note] = []
+//
+//            do {
+//                // Recogemos la informaión
+//                results = try self.coreDataStack.managedContext.fetch(self.notesFetchRequest(from: self.notebook))
+//            } catch let error as NSError {
+//                print("Error: \(error.localizedDescription)")
+//            }
+//
+//            // Exportamos la información
+//            let exportPath = NSTemporaryDirectory() + "export.csv"
+//            let exportURL = URL(fileURLWithPath: exportPath)
+//            FileManager.default.createFile(atPath: exportPath, contents: Data(), attributes: nil)
+//
+//            // Almacenamos la informaicón
+//            let fileHandle: FileHandle?
+//            do {
+//                fileHandle = try FileHandle(forWritingTo: exportURL)
+//            } catch let error as NSError {
+//                print("Error: \(error.localizedDescription)")
+//                fileHandle = nil
+//            }
+//
+//            if let fileHandle = fileHandle {
+//                for note in results {
+//                    fileHandle.seekToEndOfFile() // Añadir al final del archivo
+//                    guard  let csvData = note.csv().data(using: .utf8, allowLossyConversion: false) else { return }
+//                    fileHandle.write(csvData)
+//                }
+//
+//                fileHandle.closeFile()
+//
+//                // Avisamos al usuario cuando finaliza
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.showExportFinishedAlert(exportPath)
+//                }
+//
+//            } else {
+//                print("No ha sido posible exportar los datos")
+//            }
+//        }
+//    }
+//
+//    private func showExportFinishedAlert(_ exportPath: String) {
+//        let message = "El archivo CSV se encuentra en \(exportPath)"
+//        let alertController = UIAlertController(title: "Exportación finalizada", message: message, preferredStyle: .alert)
+//        let dismissAction = UIAlertAction(title: "Aceptar", style: .default)
+//        alertController.addAction(dismissAction)
+//
+//        present(alertController, animated: true)
+//    }
     
-    @objc private func exportCsv() {
-        coreDataStack.storeContainer.performBackgroundTask { [unowned self] (context) in
-            var results: [Note] = []
-            
-            do {
-                // Recogemos la informaión
-                results = try self.coreDataStack.managedContext.fetch(self.notesFetchRequest(from: self.notebook))
-            } catch let error as NSError {
-                print("Error: \(error.localizedDescription)")
-            }
-            
-            // Exportamos la información
-            let exportPath = NSTemporaryDirectory() + "export.csv"
-            let exportURL = URL(fileURLWithPath: exportPath)
-            FileManager.default.createFile(atPath: exportPath, contents: Data(), attributes: nil)
-            
-            // Almacenamos la informaicón
-            let fileHandle: FileHandle?
-            do {
-                fileHandle = try FileHandle(forWritingTo: exportURL)
-            } catch let error as NSError {
-                print("Error: \(error.localizedDescription)")
-                fileHandle = nil
-            }
-            
-            if let fileHandle = fileHandle {
-                for note in results {
-                    fileHandle.seekToEndOfFile() // Añadir al final del archivo
-                    guard  let csvData = note.csv().data(using: .utf8, allowLossyConversion: false) else { return }
-                    fileHandle.write(csvData)
-                }
-                
-                fileHandle.closeFile()
-                
-                // Avisamos al usuario cuando finaliza
-                DispatchQueue.main.async { [weak self] in
-                    self?.showExportFinishedAlert(exportPath)
-                }
-                
-            } else {
-                print("No ha sido posible exportar los datos")
-            }
-        }
-    }
-    
-    private func showExportFinishedAlert(_ exportPath: String) {
-        let message = "El archivo CSV se encuentra en \(exportPath)"
-        let alertController = UIAlertController(title: "Exportación finalizada", message: message, preferredStyle: .alert)
-        let dismissAction = UIAlertAction(title: "Aceptar", style: .default)
-        alertController.addAction(dismissAction)
-        
-        present(alertController, animated: true)
-    }
-    
-    private func notesFetchRequest(from notebook: Notebook) -> NSFetchRequest<Note> {
-        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-        fetchRequest.fetchBatchSize = 50
-        fetchRequest.predicate = NSPredicate(format: "notebook == %@", notebook) // Todas las notas que pertecenen a ese notebook
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-        
-        return fetchRequest
-    }
+//    private func notesFetchRequest(from notebook: Notebook) -> NSFetchRequest<Note> {
+//        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+//        fetchRequest.fetchBatchSize = 50
+//        fetchRequest.predicate = NSPredicate(format: "notebook == %@", notebook) // Todas las notas que pertecenen a ese notebook
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+//
+//        return fetchRequest
+//    }
     
     func setupUI() {
         self.view.backgroundColor = .white
@@ -158,9 +158,9 @@ extension NewNotesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let note = notes[indexPath.row]
         let detailVC = NoteDetailsViewController(kind: .existing(note: note), managedContext: coreDataStack.managedContext)
-        detailVC.delegate = self
-        //show(detailVC, sender: nil)
+        //detailVC.delegate = self
         
+        //show(detailVC, sender: nil)
         // Custom animation
         let navVC = UINavigationController(rootViewController: detailVC)
         navVC.transitioningDelegate = self
@@ -176,11 +176,11 @@ extension NewNotesListViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - NoteDetailsViewControllerProtocol implementation
-extension NewNotesListViewController: NoteDetailsViewControllerDelegate {
-    func didSaveNote() {
-        notes = (notebook.notes?.array as? [Note]) ?? []
-    }
-}
+//extension NewNotesListViewController: NoteDetailsViewControllerDelegate {
+//    func didSaveNote() {
+//        notes = (notebook.notes?.array as? [Note]) ?? []
+//    }
+//}
 
 // MARK: - Custom Animation - UIViewControllerTransitioningDelegate
 extension NewNotesListViewController : UIViewControllerTransitioningDelegate {

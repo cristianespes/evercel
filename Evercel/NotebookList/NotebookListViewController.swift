@@ -198,7 +198,9 @@ extension NotebookListViewController: UITableViewDelegate {
         //navigationController?.pushViewController(tabBarController, animated: true)
         
         
-        show(PresentNotesVC(notebook: notebook, coreDataStack: coreDataStack), sender: nil)
+        
+        //show(PresentNotesVC(notebook: notebook, coreDataStack: coreDataStack), sender: nil)
+        navigationController?.pushViewController(PresentNotesVC(notebook: notebook, coreDataStack: coreDataStack), animated: true)
         
         
     }
