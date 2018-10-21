@@ -59,7 +59,9 @@ class NoteListViewController: UIViewController {
         
 //        notes = notebook.notes
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
         
         let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add
             , target: self, action: #selector(addNote))

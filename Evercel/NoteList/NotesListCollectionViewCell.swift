@@ -31,6 +31,7 @@ class NotesListCollectionViewCell: UICollectionViewCell {
             imageView.image = UIImage(named: "120x180")
         }
         imageView.contentMode = .scaleAspectFill
+        self.layer.cornerRadius = 4.0
         creationDateLabel.text = (item.creationDate as Date?)?.customStringLabel()
     }
 

@@ -142,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				1985DA7B216BF1FC0056C67C /* NotebookListViewController.swift */,
+				1985DA6C216BEF300056C67C /* Main.storyboard */,
 				1985DA7D216BFB140056C67C /* NotebookListCell.swift */,
 			);
 			path = NotebookList;
@@ -189,7 +190,6 @@
 		19F53A6D2172516A00F04D7E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1985DA6C216BEF300056C67C /* Main.storyboard */,
 				1985DA71216BEF320056C67C /* LaunchScreen.storyboard */,
 			);
 			path = View;

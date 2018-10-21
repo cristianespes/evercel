@@ -68,23 +68,27 @@ class PresentNotesVC: UIViewController {
     
     @objc private func exportCsv() {
         coreDataStack.storeContainer.performBackgroundTask { [unowned self] (context) in
+            
             var results: [Note] = []
             
             do {
-                // Recogemos la informaión
+                // Recogemos la información de la BBDD
                 results = try self.coreDataStack.managedContext.fetch(self.notesFetchRequest(from: self.notebook))
             } catch let error as NSError {
                 print("Error: \(error.localizedDescription)")
             }
             
+            // Almacenar en disco
             // Exportamos la información
             let exportPath = NSTemporaryDirectory() + "export.csv"
             let exportURL = URL(fileURLWithPath: exportPath)
+            // Generar archivo con ese nombre
             FileManager.default.createFile(atPath: exportPath, contents: Data(), attributes: nil)
             
-            // Almacenamos la informaicón
+            // Grabar la información con un fileHandle, para acceder a la data de un archivo
             let fileHandle: FileHandle?
             do {
+                // Inicialización de fileHandle
                 fileHandle = try FileHandle(forWritingTo: exportURL)
             } catch let error as NSError {
                 print("Error: \(error.localizedDescription)")
@@ -94,16 +98,29 @@ class PresentNotesVC: UIViewController {
             if let fileHandle = fileHandle {
                 for note in results {
                     fileHandle.seekToEndOfFile() // Añadir al final del archivo
-                    guard  let csvData = note.csv().data(using: .utf8, allowLossyConversion: false) else { return }
+                    guard let csvData = note.csv().data(using: .utf8, allowLossyConversion: false) else { return }
                     fileHandle.write(csvData)
                 }
                 
                 fileHandle.closeFile()
                 
-                // Avisamos al usuario cuando finaliza
-                DispatchQueue.main.async { [weak self] in
-                    self?.showExportFinishedAlert(exportPath)
+                do {
+                    let stringData = try String(contentsOf: exportURL, encoding: String.Encoding.utf8)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.showExportFinishedAlert(file: stringData)
+                    }
+//                    let csvData = try Data(contentsOf: exportURL)
+//                    DispatchQueue.main.async { [weak self] in
+//                        self?.showExportFinishedAlert(file: csvData)
+//                    }
+                } catch let error as NSError {
+                    print("Error: \(error.localizedDescription)")
                 }
+                
+                // Avisamos al usuario cuando finaliza
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.showExportFinishedAlert(exportPath)
+//                }
                 
             } else {
                 print("No ha sido posible exportar los datos")
@@ -111,13 +128,23 @@ class PresentNotesVC: UIViewController {
         }
     }
     
-    private func showExportFinishedAlert(_ exportPath: String) {
-        let message = "El archivo CSV se encuentra en \(exportPath)"
-        let alertController = UIAlertController(title: "Exportación finalizada", message: message, preferredStyle: .alert)
-        let dismissAction = UIAlertAction(title: "Aceptar", style: .default)
-        alertController.addAction(dismissAction)
+//    private func showExportFinishedAlert(_ exportPath: String) {
+//        let message = "El archivo CSV se encuentra en \(exportPath)"
+//        let alertController = UIAlertController(title: "Exportación finalizada", message: message, preferredStyle: .alert)
+//        let dismissAction = UIAlertAction(title: "Aceptar", style: .default)
+//        alertController.addAction(dismissAction)
+//
+//        present(alertController, animated: true)
+//    }
+    
+    private func showExportFinishedAlert(file: Any) {
+        let activityViewController = UIActivityViewController(activityItems: [file], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
-        present(alertController, animated: true)
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.postToFacebook ]
+        
+        present(activityViewController, animated: true, completion: nil)
     }
     
     private func notesFetchRequest(from notebook: Notebook) -> NSFetchRequest<Note> {
@@ -134,8 +161,14 @@ class PresentNotesVC: UIViewController {
         segmentedControl.setTitle("Mapas", forSegmentAt: 1)
 //        segmentedControl.selectedSegmentIndex = 0
         
-        //view.backgroundColor = .burlywood
+        view.backgroundColor = .lightBurlywood
+        
         segmentedControl.backgroundColor = .white
+        segmentedControl.tintColor = .brown
+        
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
     }
 
     

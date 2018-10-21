@@ -131,7 +131,7 @@ class NewNotesListViewController: UIViewController {
     func setupUI() {
         self.view.backgroundColor = .white
         
-        collectionView.backgroundColor = .burlywood
+        collectionView.backgroundColor = .lightBurlywood
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -158,7 +158,7 @@ extension NewNotesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let note = notes[indexPath.row]
         let detailVC = NoteDetailsViewController(kind: .existing(note: note), managedContext: coreDataStack.managedContext)
-        //detailVC.delegate = self
+        detailVC.delegate = self
         
         //show(detailVC, sender: nil)
         // Custom animation
@@ -176,11 +176,11 @@ extension NewNotesListViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - NoteDetailsViewControllerProtocol implementation
-//extension NewNotesListViewController: NoteDetailsViewControllerDelegate {
-//    func didSaveNote() {
-//        notes = (notebook.notes?.array as? [Note]) ?? []
-//    }
-//}
+extension NewNotesListViewController: NoteDetailsViewControllerDelegate {
+    func didSaveNote() {
+        notes = (notebook.notes?.array as? [Note]) ?? []
+    }
+}
 
 // MARK: - Custom Animation - UIViewControllerTransitioningDelegate
 extension NewNotesListViewController : UIViewControllerTransitioningDelegate {

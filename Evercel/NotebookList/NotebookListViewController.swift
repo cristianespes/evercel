@@ -90,6 +90,23 @@ class NotebookListViewController: UIViewController {
         }
     }
     
+    @IBAction func shareNotebooks(_ sender: UIBarButtonItem) {
+//        coreDataStack.storeContainer.performBackgroundTask { [unowned self] (context) in
+//
+//
+//
+//
+//
+//        }
+                let message = "Proximamente podrás descargar todos los datos de la app"
+                let alertController = UIAlertController(title: "Exportar Notebooks", message: message, preferredStyle: .alert)
+                let dismissAction = UIAlertAction(title: "Aceptar", style: .default)
+                alertController.addAction(dismissAction)
+        
+                present(alertController, animated: true)
+    }
+    
+    
     @IBAction func addNotebook(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Nuevo Notebook", message: "Añadir un nuevo Notebook", preferredStyle: .alert)
         

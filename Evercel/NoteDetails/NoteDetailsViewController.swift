@@ -64,10 +64,10 @@ class NoteDetailsViewController: UIViewController {
     }
     
     func setupUI() {
-        imageView.layer.cornerRadius = 8.0
+        imageView.layer.cornerRadius = 4.0
         imageView.clipsToBounds = true
         titleTextField.font = .systemFont(ofSize:24)
-        descriptionTextView.backgroundColor = .burlywood
+        descriptionTextView.backgroundColor = .lightBurlywood
     }
     
     private func setupLocation() {
