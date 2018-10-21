@@ -54,12 +54,20 @@ class NoteDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupUI()
         setupLocation()
         configure()
         
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
+    }
+    
+    func setupUI() {
+        imageView.layer.cornerRadius = 8.0
+        imageView.clipsToBounds = true
+        titleTextField.font = .systemFont(ofSize:24)
+        descriptionTextView.backgroundColor = .burlywood
     }
     
     private func setupLocation() {
