@@ -91,19 +91,84 @@ class NotebookListViewController: UIViewController {
     }
     
     @IBAction func shareNotebooks(_ sender: UIBarButtonItem) {
-//        coreDataStack.storeContainer.performBackgroundTask { [unowned self] (context) in
-//
-//
-//
-//
-//
-//        }
-                let message = "Proximamente podrás descargar todos los datos de la app"
-                let alertController = UIAlertController(title: "Exportar Notebooks", message: message, preferredStyle: .alert)
-                let dismissAction = UIAlertAction(title: "Aceptar", style: .default)
-                alertController.addAction(dismissAction)
+        coreDataStack.storeContainer.performBackgroundTask { [unowned self] (context) in
+
+            var notebookResults: [Notebook] = []
+            
+            do {
+                // Recogemos la información de la BBDD
+                notebookResults = try self.coreDataStack.managedContext.fetch(self.notebooksFetchRequest())
+            } catch let error as NSError {
+                print("Error: \(error.localizedDescription)")
+            }
+
+            let exportPath = NSTemporaryDirectory() + "notebooks.csv"
+            let exportURL = URL(fileURLWithPath: exportPath)
+            
+            FileManager.default.createFile(atPath: exportPath, contents: Data(), attributes: nil)
+            
+            let fileHandle: FileHandle?
+            do {
+                // Inicialización de fileHandle
+                fileHandle = try FileHandle(forWritingTo: exportURL)
+            } catch let error as NSError {
+                print("Error: \(error.localizedDescription)")
+                fileHandle = nil
+            }
+
+            if let fileHandle = fileHandle {
+                for notebook in notebookResults {
+                    fileHandle.seekToEndOfFile() // Añadir al final del archivo
+                    guard let csvData = notebook.csv().data(using: .utf8, allowLossyConversion: false) else { return }
+                    fileHandle.write(csvData)
+                    
+                    for note in notebook.notes! {
+                        fileHandle.seekToEndOfFile()
+                        guard let csvData = (note as! Note).csv().data(using: .utf8, allowLossyConversion: false) else { return }
+                        fileHandle.write(csvData)
+                    }
+                }
+                
+                fileHandle.closeFile()
+                
+                do {
+                    // Exportar contenido en formato texto
+//                    let stringData = try String(contentsOf: exportURL, encoding: String.Encoding.utf8)
+//                    DispatchQueue.main.async { [weak self] in
+//                        self?.showExportFinishedAlert(file: stringData)
+//                    }
+                    // Exportar fichero CSV
+                    let csvData = try Data(contentsOf: exportURL)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.showExportFinishedAlert(file: csvData)
+                    }
+                } catch let error as NSError {
+                    print("Error: \(error.localizedDescription)")
+                }
+                
+            } else {
+                print("No ha sido posible exportar los datos")
+            }
+        }
+
+    }
+    
+    private func showExportFinishedAlert(file: Any) {
+        let activityViewController = UIActivityViewController(activityItems: [file], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
-                present(alertController, animated: true)
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.postToFacebook ]
+        
+        present(activityViewController, animated: true, completion: nil)
+    }
+    
+    private func notebooksFetchRequest() -> NSFetchRequest<Notebook> {
+        let fetchRequest: NSFetchRequest<Notebook> = Notebook.fetchRequest()
+        fetchRequest.fetchBatchSize = 50
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        
+        return fetchRequest
     }
     
     
@@ -148,8 +213,6 @@ extension NotebookListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return model.count
-        //return dataSource.count
         guard let sectionInfo = fetchedResultsController.sections?[section] else { return 0 }
         
         return sectionInfo.numberOfObjects

@@ -80,7 +80,7 @@ class PresentNotesVC: UIViewController {
             
             // Almacenar en disco
             // Exportamos la información
-            let exportPath = NSTemporaryDirectory() + "export.csv"
+            let exportPath = NSTemporaryDirectory() + "notes.csv"
             let exportURL = URL(fileURLWithPath: exportPath)
             // Generar archivo con ese nombre
             FileManager.default.createFile(atPath: exportPath, contents: Data(), attributes: nil)
@@ -105,10 +105,12 @@ class PresentNotesVC: UIViewController {
                 fileHandle.closeFile()
                 
                 do {
+                    // Exportar contenido en formato texto
                     let stringData = try String(contentsOf: exportURL, encoding: String.Encoding.utf8)
                     DispatchQueue.main.async { [weak self] in
                         self?.showExportFinishedAlert(file: stringData)
                     }
+                    // Exportar fichero CSV
 //                    let csvData = try Data(contentsOf: exportURL)
 //                    DispatchQueue.main.async { [weak self] in
 //                        self?.showExportFinishedAlert(file: csvData)
