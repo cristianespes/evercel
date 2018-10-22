@@ -17,7 +17,7 @@
                 <outlet property="descriptionTextView" destination="DX9-GL-xom" id="oHj-Rl-idE"/>
                 <outlet property="imageView" destination="PF9-Of-ze7" id="n0H-5P-ukZ"/>
                 <outlet property="lastSeenDateLabel" destination="ej2-Ad-sCO" id="UXB-oS-6Q4"/>
-                <outlet property="tagsLabel" destination="SBt-kV-98a" id="wRP-zn-wk0"/>
+                <outlet property="tagTextField" destination="8r0-OW-jas" id="cjb-db-PK6"/>
                 <outlet property="titleTextField" destination="ZXG-TS-vR8" id="xfY-sv-V9b"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -65,7 +65,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="207" height="121.33333333333333"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ttH-Bw-3mt" userLabel="Titulo">
-                                            <rect key="frame" x="0.0" y="0.0" width="207" height="101"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="207" height="100.33333333333333"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titulo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pz-im-Lvm">
                                                     <rect key="frame" x="0.0" y="0.0" width="207" height="20.333333333333332"/>
@@ -74,27 +74,27 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Inserte título..." textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ZXG-TS-vR8">
-                                                    <rect key="frame" x="0.0" y="20.333333333333329" width="207" height="80.666666666666671"/>
+                                                    <rect key="frame" x="0.0" y="20.333333333333329" width="207" height="80"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Sig-Ze-rPv" userLabel="Tags">
-                                            <rect key="frame" x="0.0" y="101" width="207" height="20.333333333333329"/>
+                                            <rect key="frame" x="0.0" y="100.33333333333334" width="207" height="21"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Etiqueta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOB-m2-kEB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="63" height="20.333333333333332"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="63" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags Placeholder" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBt-kV-98a">
-                                                    <rect key="frame" x="71" y="0.0" width="136" height="20.333333333333332"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Elige etiqueta" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="8r0-OW-jas" userLabel="selectedTag">
+                                                    <rect key="frame" x="71" y="0.0" width="136" height="21"/>
                                                     <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                         </stackView>
                                     </subviews>

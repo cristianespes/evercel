@@ -21,7 +21,7 @@ class NoteDetailsViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var tagsLabel: UILabel!
+    @IBOutlet weak var tagTextField: UITextField!
     @IBOutlet weak var creationDateLabel: UILabel!
     @IBOutlet weak var lastSeenDateLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
@@ -57,6 +57,7 @@ class NoteDetailsViewController: UIViewController {
         setupUI()
         setupLocation()
         configure()
+        createTagPicker()
         
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
@@ -92,8 +93,9 @@ class NoteDetailsViewController: UIViewController {
             let note = Note(context: managedContext)
             let modifiedNote = addProperties(to: note)
             modifiedNote.creationDate = NSDate()
+            modifiedNote.lastSeenDate = NSDate()
             modifiedNote.notebook = notebook
-            modifiedNote.tag = "Etiqueta aquí"//tagsLabel.text
+            modifiedNote.tag = tagTextField.text
             
             if let notes = notebook.notes?.mutableCopy() as? NSMutableOrderedSet {
                 notes.add(note)
@@ -150,7 +152,7 @@ class NoteDetailsViewController: UIViewController {
     
     private func addProperties(to note: Note) -> Note {
         note.title = titleTextField.text
-        note.tag = tagsLabel.text
+        note.tag = tagTextField.text
         note.text = descriptionTextView.text
         
         let imageData: NSData?
@@ -205,7 +207,7 @@ class NoteDetailsViewController: UIViewController {
     private func configureValues() {
         title = kind.title
         titleTextField.text = kind.note?.title
-        tagsLabel.text = kind.note?.tag//note.tags?.joined(separator: ",")
+        tagTextField.text = kind.note?.tag//note.tags?.joined(separator: ",")
         creationDateLabel.text = "\((kind.note?.creationDate as Date?)?.customStringLabel() ?? "Not available")"
         lastSeenDateLabel.text = "\((kind.note?.lastSeenDate as Date?)?.customStringLabel() ?? "Not available")"
         descriptionTextView.text = kind.note?.text ?? "Ingrese texto..."
@@ -279,6 +281,7 @@ extension NoteDetailsViewController: UIImagePickerControllerDelegate, UINavigati
     }
 }
 
+// MARK: - CLLocationManagerDelegate
 extension NoteDetailsViewController: CLLocationManagerDelegate {
     
     func requestLocationPermission() {
@@ -303,5 +306,41 @@ extension NoteDetailsViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("No fue posible obtener la ubicación del usuario")
+    }
+}
+
+// MARK: - UIPickerView Methods
+extension NoteDetailsViewController {
+    
+    enum Tag: Int, CaseIterable {
+        case Personal, Todo, Info, Otros
+    }
+    
+    func createTagPicker() {
+        let tagPicker = UIPickerView()
+        tagPicker.backgroundColor = .lightyellow
+        tagPicker.delegate = self
+        
+        tagTextField.inputView = tagPicker
+    }
+}
+
+// MARK: - UIPickerViewDelegate and UIPickerViewDataSource
+extension NoteDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return Tag.allCases.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(Tag.init(rawValue: row)!)"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        tagTextField.text = "\(Tag.init(rawValue: row)!)"
     }
 }
