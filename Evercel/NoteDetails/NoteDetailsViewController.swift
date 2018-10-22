@@ -86,25 +86,7 @@ class NoteDetailsViewController: UIViewController {
         configureValues()
     }
 
-    @objc private func saveNote() {
-        
-        func addProperties(to note: Note) -> Note {
-            note.title = titleTextField.text
-            note.tag = tagsLabel.text
-            note.text = descriptionTextView.text
-            
-            let imageData: NSData?
-            if let image = imageView.image,
-                let data = image.pngData() {
-                imageData = NSData(data: data)
-            } else {
-                imageData = nil
-            }
-            note.image = imageData
-            
-            return note
-        }
-        
+    @objc private func saveNote() {        
         switch kind {
         case .new(let notebook):
             let note = Note(context: managedContext)
@@ -119,8 +101,7 @@ class NoteDetailsViewController: UIViewController {
             }
             
             requestLocationPermission()
-//            note.latitude = Float(locationManager.location?.coordinate.latitude ?? 0)
-//            note.longitude = Float(locationManager.location?.coordinate.longitude ?? 0)
+            
             if let coordinates = locationManager.location?.coordinate {
                 note.latitude = coordinates.latitude
                 note.longitude = coordinates.longitude
@@ -149,7 +130,39 @@ class NoteDetailsViewController: UIViewController {
     }
     
     @objc private func cancel() {
+        switch kind {
+        case .existing(let note):
+            let modifiedNote = addProperties(to: note)
+            modifiedNote.lastSeenDate = NSDate()
+        default:
+            break
+        }
+        
+        do {
+            try managedContext.save()
+            delegate?.didSaveNote()
+        } catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
+        }
+        
         dismiss(animated: true, completion: nil)
+    }
+    
+    private func addProperties(to note: Note) -> Note {
+        note.title = titleTextField.text
+        note.tag = tagsLabel.text
+        note.text = descriptionTextView.text
+        
+        let imageData: NSData?
+        if let image = imageView.image,
+            let data = image.pngData() {
+            imageData = NSData(data: data)
+        } else {
+            imageData = nil
+        }
+        note.image = imageData
+        
+        return note
     }
     
     @IBAction func pickImage(_ sender: UIButton) {
