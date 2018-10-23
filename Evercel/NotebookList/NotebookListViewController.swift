@@ -50,18 +50,31 @@ class NotebookListViewController: UIViewController {
     
     // MARK: - Lyfe Cycle
     override func viewDidLoad() {
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.navigationItem.largeTitleDisplayMode = .always
+
         
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
+        tableView.backgroundColor = UIColor.lightyellow
+        view.backgroundColor = UIColor.lightyellow
         tableView.dataSource = self
         tableView.delegate = self
         
         configureSearchController()
         
         showAll()
+        
+        navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.navigationBar.barTintColor = .brown
+        navigationController?.navigationBar.tintColor = .lightBurlywood
+        navigationController?.navigationBar.titleTextAttributes =
+            [NSAttributedString.Key.foregroundColor: UIColor.lightBurlywood]
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationController?.navigationItem.largeTitleDisplayMode = .always
+            
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightBurlywood]
+        }
     }
     
     // MARK: - Helper methods
@@ -69,7 +82,10 @@ class NotebookListViewController: UIViewController {
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self // Objeto responsable de actualizar los resultados
         search.obscuresBackgroundDuringPresentation = false // quiero mostrar toda la tabla
-        search.searchBar.placeholder = "Search Notebook..."
+        search.searchBar.placeholder = "Buscar Notebook..."
+        search.searchBar.tintColor = .white
+        // Color del texto dentro del searchController
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationItem.searchController = search
         navigationItem.hidesSearchBarWhenScrolling = true
         definesPresentationContext = true
@@ -220,12 +236,8 @@ extension NotebookListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NotebookListCell", for: indexPath) as! NotebookListCell
-        
-//        cell.configure(with: model[indexPath.row])
-        //let notebook = dataSource[indexPath.row] as! Notebook
         let notebook = fetchedResultsController.object(at: indexPath)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NotebookListCell", for: indexPath) as! NotebookListCell
         cell.configure(with: notebook)
         
         return cell
@@ -343,7 +355,6 @@ extension NotebookListViewController: UISearchResultsUpdating {
         setNewFetchedResultController(frc)
         
         populateTotalLabel(with: predicate)
-        
     }
     
     private func showAll() {

@@ -27,12 +27,15 @@ class PresentNotesVC: UIViewController {
         let notesMapVC = NotesMapViewController(notebook: notebook, coreDataStack: coreDataStack)
         return notesMapVC
     }()
+    var notes : [Note]
+    var filteredNotes = [Note]()
     
     
     // MARK: - Initialization
     init(notebook: Notebook, coreDataStack: CoreDataStack) {
         self.notebook = notebook
         self.coreDataStack = coreDataStack
+        self.notes = (notebook.notes?.array as? [Note]) ?? []
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -44,18 +47,35 @@ class PresentNotesVC: UIViewController {
     // MARK: - Lyfe Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //navigationItem.title = "Notas"
-        title = "Notas"
-        
-        navigationController?.navigationBar.isTranslucent = false
 
         setupUI()
         displayCurrentTab(0)
         
+        configureSearchController()
+        
         let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNote))
         let exportButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(exportCsv))
         navigationItem.rightBarButtonItems = [addButtonItem, exportButtonItem]
+    }
+    
+    // MARK: - Helper methods
+    private func configureSearchController() {
+        let search = UISearchController(searchResultsController: nil)
+        search.searchResultsUpdater = self // Objeto responsable de actualizar los resultados
+        search.obscuresBackgroundDuringPresentation = false // quiero mostrar toda la tabla
+        search.searchBar.placeholder = "Buscar nota..."
+        search.searchBar.tintColor = .white
+        /*search.searchBar.backgroundColor = .blue
+        search.searchBar.barTintColor = .white
+        search.searchBar.tintColor = .white
+        search.dimsBackgroundDuringPresentation = true
+        // Color del texto dentro del searchController
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        search.searchBar.isTranslucent = true*/
+        
+        navigationItem.searchController = search
+        navigationItem.hidesSearchBarWhenScrolling = true
+        definesPresentationContext = true
     }
     
     // MARK: - Helper methods
@@ -159,11 +179,13 @@ class PresentNotesVC: UIViewController {
     }
     
     func setupUI() {
+        title = "Notas"
+        
         segmentedControl.setTitle("Listado", forSegmentAt: 0)
         segmentedControl.setTitle("Mapas", forSegmentAt: 1)
 //        segmentedControl.selectedSegmentIndex = 0
         
-        view.backgroundColor = .lightBurlywood
+        view.backgroundColor = .lightyellow
         
         segmentedControl.backgroundColor = .white
         segmentedControl.tintColor = .brown
@@ -171,6 +193,7 @@ class PresentNotesVC: UIViewController {
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
+        navigationController?.navigationBar.isTranslucent = false
     }
 
     
@@ -201,9 +224,9 @@ class PresentNotesVC: UIViewController {
         var vc: UIViewController?
         switch index {
         case 0 :
-            vc = notesListViewController
+            vc = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
         case 1 :
-            vc = notesMapViewController
+            vc = NotesMapViewController(notebook: notebook, coreDataStack: coreDataStack)
         default:
             return nil
         }
@@ -221,4 +244,22 @@ extension PresentNotesVC: NoteDetailsViewControllerDelegate {
         
         changeViewsToShow(segmentedControl.selectedSegmentIndex)
     }
+}
+
+// MARK: - UISearchResultsUpdating implmentation
+extension PresentNotesVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            self.filteredNotes = self.notes.filter({ (note) -> Bool in
+                let titleToFind = note.title?.range(of: text, options: NSString.CompareOptions.caseInsensitive)
+                return titleToFind != nil
+            })
+            notebook.notes = NSOrderedSet(array: filteredNotes)
+            changeViewsToShow(segmentedControl.selectedSegmentIndex)
+        } else {
+            notebook.notes = NSOrderedSet(array: notes)
+            changeViewsToShow(segmentedControl.selectedSegmentIndex)
+        }
+    }
+    
 }

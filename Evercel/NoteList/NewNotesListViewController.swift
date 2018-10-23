@@ -22,6 +22,7 @@ class NewNotesListViewController: UIViewController {
             collectionView.reloadData()
         }
     }
+    
     let transition = Animator()
     
     enum Constants {
@@ -56,6 +57,7 @@ class NewNotesListViewController: UIViewController {
 //        let exportButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(exportCsv))
 //        navigationItem.rightBarButtonItems = [addButtonItem, exportButtonItem]
     }
+
     
     // MARK: - Helper methods
 //    @objc private func addNote() {
@@ -131,10 +133,12 @@ class NewNotesListViewController: UIViewController {
     func setupUI() {
         self.view.backgroundColor = .white
         
-        collectionView.backgroundColor = .lightBurlywood
+        collectionView.backgroundColor = .lightyellow
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        collectionView.alwaysBounceVertical = true
     }
 
 }

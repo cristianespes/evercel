@@ -25,5 +25,6 @@ class NotebookListCell: UITableViewCell {
     func configure(with notebook: Notebook) {
         titleLabel.text = notebook.name
         creationDateLabel.text = "\((notebook.creationDate as Date?)?.customStringLabel() ?? "Not available")"
+        backgroundColor = UIColor.lightyellow
     }
 }
