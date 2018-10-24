@@ -85,20 +85,18 @@ class NoteDetailsViewController: UIViewController {
     private func configure() {
         switch kind {
         case .existing:
-            let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .save
-                , target: self, action: #selector(saveNote))
-            let deleteButtonItem = UIBarButtonItem(barButtonSystemItem: .trash
-                , target: self, action: #selector(deleteNote))
+            let saveButtonItem = UIBarButtonItem(title: "Guardar", style: .plain, target: self, action: #selector(saveNote))
+//                UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveNote))
+            let deleteButtonItem = UIBarButtonItem(title: "Eliminar", style: .plain, target: self, action: #selector(deleteNote))
+//            UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteNote))
             self.navigationItem.rightBarButtonItems = [saveButtonItem, deleteButtonItem]
-            let cancelButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
-            navigationItem.leftBarButtonItem = cancelButtonItem
         case .new:
-            let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .save
-                , target: self, action: #selector(saveNote))
+            let saveButtonItem = UIBarButtonItem(title: "Guardar", style: .plain, target: self, action: #selector(saveNote))
             self.navigationItem.rightBarButtonItem = saveButtonItem
         }
         
-        let cancelButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+        let cancelButtonItem = UIBarButtonItem(title: "Cancelar", style: .plain, target: self, action: #selector(cancel))
+//            UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
         navigationItem.leftBarButtonItem = cancelButtonItem
         
         configureValues()
