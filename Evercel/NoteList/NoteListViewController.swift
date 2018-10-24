@@ -115,7 +115,7 @@ extension NoteListViewController: UITableViewDelegate {
 }
 
 extension NoteListViewController: NoteDetailsViewControllerDelegate {
-    func didSaveNote() {
+    func didChangeNote() {
         notes = (notebook.notes?.array as? [Note]) ?? []
     }
 }

@@ -143,7 +143,7 @@
                     </subviews>
                 </stackView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DX9-GL-xom">
-                    <rect key="frame" x="16" y="254" width="343" height="524"/>
+                    <rect key="frame" x="16" y="254" width="343" height="508"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
@@ -156,7 +156,7 @@
                 <constraint firstItem="DX9-GL-xom" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="N68-VS-Qbi"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DX9-GL-xom" secondAttribute="trailing" constant="16" id="RAA-mP-n1c"/>
                 <constraint firstItem="xij-DR-vel" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="X4b-Lh-bwd"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="DX9-GL-xom" secondAttribute="bottom" id="fmu-hB-H5T"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="DX9-GL-xom" secondAttribute="bottom" constant="16" id="fmu-hB-H5T"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>

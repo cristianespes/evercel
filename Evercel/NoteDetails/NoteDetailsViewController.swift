@@ -12,7 +12,7 @@ import CoreLocation
 
 // MARK: - NoteDetailsViewControllerProtocol
 protocol NoteDetailsViewControllerDelegate: class {
-    func didSaveNote()
+    func didChangeNote()
 }
 
 // MARK:- NoteDetailsViewController class
@@ -69,6 +69,11 @@ class NoteDetailsViewController: UIViewController {
         imageView.clipsToBounds = true
         titleTextField.font = .systemFont(ofSize:24)
         descriptionTextView.backgroundColor = .lightBurlywood
+        view.backgroundColor = .lightyellow
+        navigationController?.navigationBar.barTintColor = .brown
+        navigationController?.navigationBar.tintColor = .lightBurlywood
+        navigationController?.navigationBar.titleTextAttributes =
+            [NSAttributedString.Key.foregroundColor: UIColor.lightBurlywood]
     }
     
     private func setupLocation() {
@@ -78,9 +83,21 @@ class NoteDetailsViewController: UIViewController {
     }
     
     private func configure() {
-        let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .save
-            , target: self, action: #selector(saveNote))
-        self.navigationItem.rightBarButtonItem = saveButtonItem
+        switch kind {
+        case .existing:
+            let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .save
+                , target: self, action: #selector(saveNote))
+            let deleteButtonItem = UIBarButtonItem(barButtonSystemItem: .trash
+                , target: self, action: #selector(deleteNote))
+            self.navigationItem.rightBarButtonItems = [saveButtonItem, deleteButtonItem]
+            let cancelButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+            navigationItem.leftBarButtonItem = cancelButtonItem
+        case .new:
+            let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .save
+                , target: self, action: #selector(saveNote))
+            self.navigationItem.rightBarButtonItem = saveButtonItem
+        }
+        
         let cancelButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
         navigationItem.leftBarButtonItem = cancelButtonItem
         
@@ -123,7 +140,25 @@ class NoteDetailsViewController: UIViewController {
         
         do {
             try managedContext.save()
-            delegate?.didSaveNote()
+            delegate?.didChangeNote()
+        } catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func deleteNote() {
+        switch kind {
+        case .existing(let note):
+            managedContext.delete(note)
+        default:
+            break
+        }
+        
+        do {
+            try managedContext.save()
+            delegate?.didChangeNote()
         } catch let error as NSError {
             print("Error: \(error.localizedDescription)")
         }
@@ -142,7 +177,7 @@ class NoteDetailsViewController: UIViewController {
         
         do {
             try managedContext.save()
-            delegate?.didSaveNote()
+            delegate?.didChangeNote()
         } catch let error as NSError {
             print("Error: \(error.localizedDescription)")
         }

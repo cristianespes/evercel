@@ -181,7 +181,7 @@ extension NewNotesListViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - NoteDetailsViewControllerProtocol implementation
 extension NewNotesListViewController: NoteDetailsViewControllerDelegate {
-    func didSaveNote() {
+    func didChangeNote() {
         notes = (notebook.notes?.array as? [Note]) ?? []
     }
 }
