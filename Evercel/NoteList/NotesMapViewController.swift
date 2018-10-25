@@ -44,11 +44,9 @@ class NotesMapViewController: UIViewController {
         
         setupUI()
         
-        let myHome = CLLocationCoordinate2D(latitude: 37.78583526611328, longitude: -122.40641784667969)
-        //let myHome = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-        //let myHome = CLLocationCoordinate2D(latitude: 41.646777, longitude: -0.866051)
-        let regionRadius: CLLocationDistance = 1000
-        let region = MKCoordinateRegion(center: myHome, latitudinalMeters: regionRadius, longitudinalMeters: 1000)
+        let center = CLLocationCoordinate2D(latitude: 40.416679, longitude: -3.703829)
+        let regionRadius: CLLocationDistance = 1500000
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius, longitudinalMeters: 1000)
         
         mapView.setRegion(region, animated: true)
     }
@@ -69,17 +67,14 @@ class NotesMapViewController: UIViewController {
             locationsOfNote.append(noteLocalize)
         }
         
-        let noteLocalize1 = LocationOfNote(title: "Prueba1", date: "Fecha1", location: CLLocationCoordinate2D(latitude: 37.785021, longitude: -122.402974))
-        locationsOfNote.append(noteLocalize1)
-        
-        let noteLocalize2 = LocationOfNote(title: "Prueba2", date: "Fecha2", location: CLLocationCoordinate2D(latitude: 37.782054, longitude: -122.40527))
-        locationsOfNote.append(noteLocalize2)
-        
-        let noteLocalize3 = LocationOfNote(title: "Prueba3", date: "Fecha3", location: CLLocationCoordinate2D(latitude: 37.78107, longitude: -122.410216))
-        locationsOfNote.append(noteLocalize3)
-        
-//        let myHome = LocationOfNote(title: "My Home", date: "Para poder dormir", location: CLLocationCoordinate2D(latitude: 41.646777, longitude: -0.866051))
-//        locationsOfNote.append(myHome)
+//        let noteLocalize1 = LocationOfNote(title: "Prueba1", date: "Fecha1", location: CLLocationCoordinate2D(latitude: 40.417416, longitude: -3.702515))
+//        locationsOfNote.append(noteLocalize1)
+//
+//        let noteLocalize2 = LocationOfNote(title: "Prueba2", date: "Fecha2", location: CLLocationCoordinate2D(latitude: 40.416679, longitude: -3.703829))
+//        locationsOfNote.append(noteLocalize2)
+//
+//        let noteLocalize3 = LocationOfNote(title: "Prueba3", date: "Fecha3", location: CLLocationCoordinate2D(latitude: 41.646769, longitude: -0.865971))
+//        locationsOfNote.append(noteLocalize3)
     }
 
 }
@@ -111,15 +106,33 @@ extension NotesMapViewController: MKMapViewDelegate {
             annotacionView?.annotation = annotation
         }
         
-        annotacionView?.markerTintColor = .green
+        annotacionView?.markerTintColor = .brown
+        //annotacionView?.image = UIImage(named: "notebook")
         annotacionView?.titleVisibility = .visible
         annotacionView?.subtitleVisibility = .adaptive
         
         return annotacionView
     }
     
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        print("Pulsado chincheta: \(view.annotation?.title) ")
-//    }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let annotationTitle = view.annotation?.title else { return }
     
+            let note = notes.filter({$0.title?.lowercased() == annotationTitle!.lowercased()}).first!
+            
+            let detailVC = NoteDetailsViewController(kind: .existing(note: note), managedContext: coreDataStack.managedContext)
+            detailVC.delegate = self
+            
+            show(detailVC, sender: nil)
+    }
+}
+
+// MARK: - NoteDetailsViewControllerProtocol implementation
+extension NotesMapViewController: NoteDetailsViewControllerDelegate {
+    func didChangeNote() {
+        print("Recibe llamada")
+        notes = (notebook.notes?.array as? [Note]) ?? []
+        print("total notas: \(notes.count)")
+        mapView.removeAnnotations(mapView.annotations)
+        loadLocationsOfNote()
+    }
 }
