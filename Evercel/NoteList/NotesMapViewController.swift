@@ -114,25 +114,23 @@ extension NotesMapViewController: MKMapViewDelegate {
         return annotacionView
     }
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let annotationTitle = view.annotation?.title else { return }
-    
-            let note = notes.filter({$0.title?.lowercased() == annotationTitle!.lowercased()}).first!
-            
-            let detailVC = NoteDetailsViewController(kind: .existing(note: note), managedContext: coreDataStack.managedContext)
-            detailVC.delegate = self
-            
-            show(detailVC, sender: nil)
-    }
+//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//        guard let annotationTitle = view.annotation?.title else { return }
+//
+//            let note = notes.filter({$0.title?.lowercased() == annotationTitle!.lowercased()}).first!
+//
+//            let detailVC = NoteDetailsViewController(kind: .existing(note: note), managedContext: coreDataStack.managedContext)
+//            detailVC.delegate = self
+//
+//            show(detailVC, sender: nil)
+//    }
 }
 
 // MARK: - NoteDetailsViewControllerProtocol implementation
-extension NotesMapViewController: NoteDetailsViewControllerDelegate {
-    func didChangeNote() {
-        print("Recibe llamada")
-        notes = (notebook.notes?.array as? [Note]) ?? []
-        print("total notas: \(notes.count)")
-        mapView.removeAnnotations(mapView.annotations)
-        loadLocationsOfNote()
-    }
-}
+//extension NotesMapViewController: NoteDetailsViewControllerDelegate {
+//    func didChangeNote() {
+//        notes = (notebook.notes?.array as? [Note]) ?? []
+//        mapView.removeAnnotations(mapView.annotations)
+//        loadLocationsOfNote()
+//    }
+//}

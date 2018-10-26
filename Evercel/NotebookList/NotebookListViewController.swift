@@ -225,6 +225,7 @@ class NotebookListViewController: UIViewController {
 extension NotebookListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let section = fetchedResultsController.sections else { return 1 }
+        
         return section.count
     }
     
@@ -232,7 +233,6 @@ extension NotebookListViewController: UITableViewDataSource {
         guard let sectionInfo = fetchedResultsController.sections?[section] else { return 0 }
         
         return sectionInfo.numberOfObjects
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

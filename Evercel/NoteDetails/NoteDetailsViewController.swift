@@ -144,7 +144,7 @@ class NoteDetailsViewController: UIViewController {
         }
         
         dismiss(animated: true, completion: nil)
-        navigationController?.popViewController(animated: true)
+        //navigationController?.popViewController(animated: true)
     }
     
     @objc private func deleteNote() {
@@ -183,7 +183,7 @@ class NoteDetailsViewController: UIViewController {
         }
         
         dismiss(animated: true, completion: nil)
-        navigationController?.popViewController(animated: true)
+        //navigationController?.popViewController(animated: true)
     }
     
     private func addProperties(to note: Note) -> Note {
