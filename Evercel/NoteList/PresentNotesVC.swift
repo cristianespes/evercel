@@ -239,6 +239,8 @@ class PresentNotesVC: UIViewController {
 // MARK: - NoteDetailsViewControllerProtocol implementation
 extension PresentNotesVC: NoteDetailsViewControllerDelegate {
     func didChangeNote() {
+        notes = (notebook.notes?.array as? [Note]) ?? []
+        
         notesListViewController = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
         notesMapViewController = NotesMapViewController(notebook: notebook, coreDataStack: coreDataStack)
         
