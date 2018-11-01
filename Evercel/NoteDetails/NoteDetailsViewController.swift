@@ -87,8 +87,8 @@ class NoteDetailsViewController: UIViewController {
         case .existing:
             let saveButtonItem = UIBarButtonItem(title: "Guardar", style: .plain, target: self, action: #selector(saveNote))
 //                UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveNote))
-            let deleteButtonItem = UIBarButtonItem(title: "Eliminar", style: .plain, target: self, action: #selector(deleteNote))
-//            UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteNote))
+//            let deleteButtonItem = UIBarButtonItem(title: "Eliminar", style: .plain, target: self, action: #selector(deleteNote))
+            let deleteButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteNote))
             self.navigationItem.rightBarButtonItems = [saveButtonItem, deleteButtonItem]
         case .new:
             let saveButtonItem = UIBarButtonItem(title: "Guardar", style: .plain, target: self, action: #selector(saveNote))

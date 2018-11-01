@@ -58,7 +58,7 @@ class NoteListViewController: UIViewController {
         title = "Notas"
         
 //        notes = notebook.notes
-        navigationController?.navigationBar.isTranslucent = false
+        //navigationController?.navigationBar.isTranslucent = false
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
