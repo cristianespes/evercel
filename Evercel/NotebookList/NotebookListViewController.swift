@@ -205,8 +205,6 @@ class NotebookListViewController: UIViewController {
                 print(error.localizedDescription)
             }
             
-            //self.tableView.reloadData()
-            //self.reloadView()
             self.showAll()
         }
         
@@ -253,8 +251,6 @@ extension NotebookListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let notebook = fetchedResultsController.object(at: indexPath)
         navigationController?.pushViewController(PresentNotesVC(notebook: notebook, coreDataStack: coreDataStack), animated: true)
-        
-        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -277,9 +273,6 @@ extension NotebookListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        // Eliminar Notebook
-//        guard let notebookToRemove = dataSource[indexPath.row] as? Notebook, editingStyle == .delete else { return }
-        
         guard editingStyle == .delete else { return }
         
         let notebookToRemove = fetchedResultsController.object(at: indexPath)

@@ -17,11 +17,11 @@ class NewNotesListViewController: UIViewController {
     // MARK: - Properties
     let notebook: Notebook
     let coreDataStack: CoreDataStack
-    var notes: [Note] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+//    var notes: [Note] {
+//        didSet {
+//            collectionView.reloadData()
+//        }
+//    }
     
     let transition = Animator()
     
@@ -29,10 +29,31 @@ class NewNotesListViewController: UIViewController {
         static let columns : CGFloat = 2
     }
     
+    private var fetchedResultsController: NSFetchedResultsController<Note>!
+    
+    private func getFetchedResultsController() -> NSFetchedResultsController<Note> {
+
+        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        
+        fetchRequest.fetchBatchSize = 50
+        
+        fetchRequest.predicate = NSPredicate(format: "notebook == %@", notebook) // Todas las notas que pertecenen a ese notebook
+        
+        let sort = NSSortDescriptor(key: #keyPath(Note.creationDate), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        return NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: coreDataStack.managedContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+    }
+    
+    
     // MARK: - Initialization
     init(notebook: Notebook, coreDataStack: CoreDataStack) {
         self.notebook = notebook
-        self.notes = (notebook.notes?.array as? [Note]) ?? []
+        //self.notes = (notebook.notes?.array as? [Note]) ?? []
         self.coreDataStack = coreDataStack
         
         super.init(nibName: nil, bundle: nil)
@@ -50,8 +71,20 @@ class NewNotesListViewController: UIViewController {
         
         setupUI()
         
+        showAll()
+        
         let nib = UINib(nibName: "NotesListCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "NotesListCollectionViewCell")
+    }
+    
+    private func showAll() {
+        fetchedResultsController = getFetchedResultsController()
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Could not fetch \(error.localizedDescription)")
+        }
     }
     
     func setupUI() {
@@ -68,12 +101,19 @@ class NewNotesListViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension NewNotesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return notes.count
+        //return notes.count
+        
+        guard let sectionInfo = fetchedResultsController.sections?[section] else { return 0 }
+
+        return sectionInfo.numberOfObjects
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let note = fetchedResultsController.object(at: indexPath)
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NotesListCollectionViewCell", for: indexPath) as! NotesListCollectionViewCell
-        cell.configure(with: notes[indexPath.row])
+        cell.configure(with: note)
         
         return cell
     }
@@ -82,11 +122,12 @@ extension NewNotesListViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension NewNotesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let note = notes[indexPath.row]
+        //let note = notes[indexPath.row]
+        let note = fetchedResultsController.object(at: indexPath)
         let detailVC = NoteDetailsViewController(kind: .existing(note: note), managedContext: coreDataStack.managedContext)
         detailVC.delegate = self
         //show(detailVC, sender: nil)
-        
+
         // Custom animation
         let navVC = UINavigationController(rootViewController: detailVC)
         navVC.transitioningDelegate = self
@@ -104,7 +145,7 @@ extension NewNotesListViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - NoteDetailsViewControllerProtocol implementation
 extension NewNotesListViewController: NoteDetailsViewControllerDelegate {
     func didChangeNote() {
-        notes = (notebook.notes?.array as? [Note]) ?? []
+        //notes = (notebook.notes?.array as? [Note]) ?? []
     }
 }
 

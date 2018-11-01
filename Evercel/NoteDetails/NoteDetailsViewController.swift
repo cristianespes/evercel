@@ -123,7 +123,7 @@ class NoteDetailsViewController: UIViewController {
                 note.latitude = coordinates.latitude
                 note.longitude = coordinates.longitude
             }
-            print("latitude: \(note.latitude) / longitude: \(note.longitude)")
+            //print("latitude: \(note.latitude) / longitude: \(note.longitude)")
             
             // Settear la relación inversa
             // El note tiene que pertenecer a los notes de ... tal, sino puede saltar un error
