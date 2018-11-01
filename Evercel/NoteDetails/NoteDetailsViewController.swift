@@ -102,7 +102,7 @@ class NoteDetailsViewController: UIViewController {
         configureValues()
     }
 
-    @objc private func saveNote() {        
+    @objc private func saveNote() {
         switch kind {
         case .new(let notebook):
             let note = Note(context: managedContext)
@@ -123,7 +123,6 @@ class NoteDetailsViewController: UIViewController {
                 note.latitude = coordinates.latitude
                 note.longitude = coordinates.longitude
             }
-            //print("latitude: \(note.latitude) / longitude: \(note.longitude)")
             
             // Settear la relación inversa
             // El note tiene que pertenecer a los notes de ... tal, sino puede saltar un error
@@ -131,11 +130,17 @@ class NoteDetailsViewController: UIViewController {
                 notes.add(note)
                 notebook.notes = notes
             }
+            
+            // Enviar una notificacion
+            let nc = NotificationCenter.default
+            let notification = Notification(name: Notification.Name(rawValue: "didChangeNote"), object: self, userInfo: nil)
+            // Enviar notificacion
+            nc.post(notification)
+            
         case .existing(let note):
             let modifiedNote = addProperties(to: note)
             modifiedNote.lastSeenDate = NSDate()
         }
-        
         do {
             try managedContext.save()
             delegate?.didChangeNote()
@@ -144,7 +149,6 @@ class NoteDetailsViewController: UIViewController {
         }
         
         dismiss(animated: true, completion: nil)
-        //navigationController?.popViewController(animated: true)
     }
     
     @objc private func deleteNote() {
@@ -163,7 +167,6 @@ class NoteDetailsViewController: UIViewController {
         }
         
         dismiss(animated: true, completion: nil)
-        //navigationController?.popViewController(animated: true)
     }
     
     @objc private func cancel() {

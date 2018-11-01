@@ -65,6 +65,13 @@ class NewNotesListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    deinit {
+        // Baja en la notificación
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+    
     // MARK: - Lyfe Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +82,22 @@ class NewNotesListViewController: UIViewController {
         
         let nib = UINib(nibName: "NotesListCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "NotesListCollectionViewCell")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Nos damos de alta en las notificaciones
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(notesDidChange), name: Notification.Name(rawValue: "didChangeNote"), object: nil)
+    }
+    
+    // MARK: - Notifications
+    @objc func notesDidChange(notification: Notification) {
+        // Actualizar el modelo
+        showAll()
+        // Sincronizar las vistas
+        collectionView.reloadData()
     }
     
     private func showAll() {
@@ -145,7 +168,8 @@ extension NewNotesListViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - NoteDetailsViewControllerProtocol implementation
 extension NewNotesListViewController: NoteDetailsViewControllerDelegate {
     func didChangeNote() {
-        //notes = (notebook.notes?.array as? [Note]) ?? []
+        showAll()
+        collectionView.reloadData()
     }
 }
 

@@ -36,6 +36,11 @@ class NotesMapViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        // Baja en la notificación
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
     
     // MARK: - Lyfe Cycle
     override func viewDidLoad() {
@@ -49,6 +54,19 @@ class NotesMapViewController: UIViewController {
         let region = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius, longitudinalMeters: 1000)
         
         mapView.setRegion(region, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Nos damos de alta en las notificaciones
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(notesDidChange), name: Notification.Name(rawValue: "didChangeNote"), object: nil)
+    }
+    
+    // MARK: - Notifications
+    @objc func notesDidChange(notification: Notification) {
+        // Actualizar el mapa
     }
     
     func setupUI() {

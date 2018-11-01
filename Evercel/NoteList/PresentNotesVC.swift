@@ -30,7 +30,6 @@ class PresentNotesVC: UIViewController {
     var notes : [Note]
     var filteredNotes = [Note]()
     
-    
     // MARK: - Initialization
     init(notebook: Notebook, coreDataStack: CoreDataStack) {
         self.notebook = notebook
@@ -65,13 +64,6 @@ class PresentNotesVC: UIViewController {
         search.obscuresBackgroundDuringPresentation = false // quiero mostrar toda la tabla
         search.searchBar.placeholder = "Buscar nota..."
         search.searchBar.tintColor = .white
-        /*search.searchBar.backgroundColor = .blue
-        search.searchBar.barTintColor = .white
-        search.searchBar.tintColor = .white
-        search.dimsBackgroundDuringPresentation = true
-        // Color del texto dentro del searchController
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        search.searchBar.isTranslucent = true*/
         
         navigationItem.searchController = search
         navigationItem.hidesSearchBarWhenScrolling = true
@@ -224,9 +216,9 @@ class PresentNotesVC: UIViewController {
         var vc: UIViewController?
         switch index {
         case 0 :
-            vc = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
+            vc = notesListViewController
         case 1 :
-            vc = NotesMapViewController(notebook: notebook, coreDataStack: coreDataStack)
+            vc = notesMapViewController
         default:
             return nil
         }
@@ -239,9 +231,9 @@ class PresentNotesVC: UIViewController {
 // MARK: - NoteDetailsViewControllerProtocol implementation
 extension PresentNotesVC: NoteDetailsViewControllerDelegate {
     func didChangeNote() {
-        notes = (notebook.notes?.array as? [Note]) ?? []
+        //notes = (notebook.notes?.array as? [Note]) ?? []
         
-        notesListViewController = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
+//        notesListViewController = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
         notesMapViewController = NotesMapViewController(notebook: notebook, coreDataStack: coreDataStack)
         
         changeViewsToShow(segmentedControl.selectedSegmentIndex)
