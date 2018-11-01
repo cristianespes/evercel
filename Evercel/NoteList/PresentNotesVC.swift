@@ -73,7 +73,6 @@ class PresentNotesVC: UIViewController {
     // MARK: - Helper methods
     @objc private func addNote() {
         let newNoteVC = NoteDetailsViewController(kind: .new(notebook: notebook), managedContext: coreDataStack.managedContext)
-        newNoteVC.delegate = self
         let navVC = UINavigationController(rootViewController: newNoteVC)
         self.present(navVC, animated: true, completion: nil)
     }
@@ -226,18 +225,6 @@ class PresentNotesVC: UIViewController {
         return vc
     }
 
-}
-
-// MARK: - NoteDetailsViewControllerProtocol implementation
-extension PresentNotesVC: NoteDetailsViewControllerDelegate {
-    func didChangeNote() {
-        //notes = (notebook.notes?.array as? [Note]) ?? []
-        
-//        notesListViewController = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
-        notesMapViewController = NotesMapViewController(notebook: notebook, coreDataStack: coreDataStack)
-        
-        changeViewsToShow(segmentedControl.selectedSegmentIndex)
-    }
 }
 
 // MARK: - UISearchResultsUpdating implmentation
