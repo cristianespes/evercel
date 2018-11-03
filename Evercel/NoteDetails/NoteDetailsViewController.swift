@@ -133,7 +133,7 @@ class NoteDetailsViewController: UIViewController {
             
             // Enviar una notificacion
             let nc = NotificationCenter.default
-            let notification = Notification(name: Notification.Name(rawValue: "didChangeNote"), object: self, userInfo: nil)
+            let notification = Notification(name: Notification.Name(rawValue: "didAddNote"), object: self, userInfo: nil)
             // Enviar notificacion
             nc.post(notification)
             
@@ -186,7 +186,6 @@ class NoteDetailsViewController: UIViewController {
         }
         
         dismiss(animated: true, completion: nil)
-        //navigationController?.popViewController(animated: true)
     }
     
     private func addProperties(to note: Note) -> Note {
@@ -249,7 +248,7 @@ class NoteDetailsViewController: UIViewController {
         tagTextField.text = kind.note?.tag//note.tags?.joined(separator: ",")
         creationDateLabel.text = "\((kind.note?.creationDate as Date?)?.customStringLabel() ?? "Not available")"
         lastSeenDateLabel.text = "\((kind.note?.lastSeenDate as Date?)?.customStringLabel() ?? "Not available")"
-        descriptionTextView.text = kind.note?.text ?? "Ingrese texto..."
+        descriptionTextView.text = kind.note?.text ?? ""
         
         guard let imageData = kind.note?.image as Data? else {
             // TODO: CAMBIAR PARA MOSTRAR PLACE HOLDER

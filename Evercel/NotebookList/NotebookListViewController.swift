@@ -84,10 +84,13 @@ class NotebookListViewController: UIViewController {
         search.obscuresBackgroundDuringPresentation = false // quiero mostrar toda la tabla
         search.searchBar.placeholder = "Buscar Notebook..."
         search.searchBar.tintColor = .white
+        
+        navigationItem.hidesSearchBarWhenScrolling = false
+        search.hidesNavigationBarDuringPresentation = false
+        
         // Color del texto dentro del searchController
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationItem.searchController = search
-        navigationItem.hidesSearchBarWhenScrolling = true
         definesPresentationContext = true
     }
     

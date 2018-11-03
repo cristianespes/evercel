@@ -19,22 +19,20 @@ class PresentNotesVC: UIViewController {
     let notebook: Notebook
     let coreDataStack: CoreDataStack
     var currentViewController: UIViewController?
-    lazy var notesListViewController: UIViewController = {
+    lazy var notesListViewController: NewNotesListViewController = {
         let notesListVC = NewNotesListViewController(notebook: notebook, coreDataStack: coreDataStack)
         return notesListVC
     }()
-    lazy var notesMapViewController: UIViewController = {
+    lazy var notesMapViewController: NotesMapViewController = {
         let notesMapVC = NotesMapViewController(notebook: notebook, coreDataStack: coreDataStack)
         return notesMapVC
     }()
-    var notes : [Note]
-    var filteredNotes = [Note]()
+    var search: UISearchController!
     
     // MARK: - Initialization
     init(notebook: Notebook, coreDataStack: CoreDataStack) {
         self.notebook = notebook
         self.coreDataStack = coreDataStack
-        self.notes = (notebook.notes?.array as? [Note]) ?? []
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,7 +44,7 @@ class PresentNotesVC: UIViewController {
     // MARK: - Lyfe Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
         displayCurrentTab(0)
         
@@ -59,19 +57,22 @@ class PresentNotesVC: UIViewController {
     
     // MARK: - Helper methods
     private func configureSearchController() {
-        let search = UISearchController(searchResultsController: nil)
+        search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self // Objeto responsable de actualizar los resultados
         search.obscuresBackgroundDuringPresentation = false // quiero mostrar toda la tabla
         search.searchBar.placeholder = "Buscar nota..."
         search.searchBar.tintColor = .white
+        search.hidesNavigationBarDuringPresentation = false
         
         navigationItem.searchController = search
-        navigationItem.hidesSearchBarWhenScrolling = true
+        navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
     }
     
     // MARK: - Helper methods
     @objc private func addNote() {
+        search.searchBar.text = nil
+        
         let newNoteVC = NoteDetailsViewController(kind: .new(notebook: notebook), managedContext: coreDataStack.managedContext)
         let navVC = UINavigationController(rootViewController: newNoteVC)
         self.present(navVC, animated: true, completion: nil)
@@ -174,7 +175,6 @@ class PresentNotesVC: UIViewController {
         
         segmentedControl.setTitle("Listado", forSegmentAt: 0)
         segmentedControl.setTitle("Mapas", forSegmentAt: 1)
-//        segmentedControl.selectedSegmentIndex = 0
         
         view.backgroundColor = .lightyellow
         
@@ -231,15 +231,11 @@ class PresentNotesVC: UIViewController {
 extension PresentNotesVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text, !text.isEmpty {
-            self.filteredNotes = self.notes.filter({ (note) -> Bool in
-                let titleToFind = note.title?.range(of: text, options: NSString.CompareOptions.caseInsensitive)
-                return titleToFind != nil
-            })
-            notebook.notes = NSOrderedSet(array: filteredNotes)
-            changeViewsToShow(segmentedControl.selectedSegmentIndex)
+            // Mostrar resultados filtrados
+            notesListViewController.showFilteredResults(with: text)
         } else {
-            notebook.notes = NSOrderedSet(array: notes)
-            changeViewsToShow(segmentedControl.selectedSegmentIndex)
+            // Mostrar todos los resultados
+            notesListViewController.showAll()
         }
     }
     

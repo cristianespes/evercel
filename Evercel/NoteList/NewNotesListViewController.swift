@@ -17,11 +17,6 @@ class NewNotesListViewController: UIViewController {
     // MARK: - Properties
     let notebook: Notebook
     let coreDataStack: CoreDataStack
-//    var notes: [Note] {
-//        didSet {
-//            collectionView.reloadData()
-//        }
-//    }
     
     let transition = Animator()
     
@@ -31,13 +26,17 @@ class NewNotesListViewController: UIViewController {
     
     private var fetchedResultsController: NSFetchedResultsController<Note>!
     
-    private func getFetchedResultsController() -> NSFetchedResultsController<Note> {
+    private func getFetchedResultsController(with predicate: NSPredicate = NSPredicate(value: true)) -> NSFetchedResultsController<Note> {
 
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         
         fetchRequest.fetchBatchSize = 50
         
-        fetchRequest.predicate = NSPredicate(format: "notebook == %@", notebook) // Todas las notas que pertecenen a ese notebook
+        let predicateNotebook = NSPredicate(format: "notebook == %@", notebook) // Todas las notas que pertecenen a ese notebook
+        
+        let predicates = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [predicateNotebook, predicate])
+        
+        fetchRequest.predicate = predicates
         
         let sort = NSSortDescriptor(key: #keyPath(Note.creationDate), ascending: true)
         fetchRequest.sortDescriptors = [sort]
@@ -49,11 +48,29 @@ class NewNotesListViewController: UIViewController {
             cacheName: nil)
     }
     
+    private func setNewFetchedResultController(_ newFrc: NSFetchedResultsController<Note>) {
+        let oldFrc = fetchedResultsController
+        if (newFrc != oldFrc) {
+            fetchedResultsController = newFrc
+            do {
+                try fetchedResultsController.performFetch()
+            } catch let error as NSError {
+                print("Could not fetch \(error.localizedDescription)")
+            }
+            collectionView.reloadData()
+        }
+    }
+    
+    func showFilteredResults(with query: String) {
+        let predicate = NSPredicate(format: "title CONTAINS[c] %@", query)
+        let frc = getFetchedResultsController(with: predicate)
+        setNewFetchedResultController(frc)
+    }
+    
     
     // MARK: - Initialization
     init(notebook: Notebook, coreDataStack: CoreDataStack) {
         self.notebook = notebook
-        //self.notes = (notebook.notes?.array as? [Note]) ?? []
         self.coreDataStack = coreDataStack
         
         super.init(nibName: nil, bundle: nil)
@@ -89,7 +106,7 @@ class NewNotesListViewController: UIViewController {
         
         // Nos damos de alta en las notificaciones
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(notesDidChange), name: Notification.Name(rawValue: "didChangeNote"), object: nil)
+        notificationCenter.addObserver(self, selector: #selector(notesDidChange), name: Notification.Name(rawValue: "didAddNote"), object: nil)
     }
     
     // MARK: - Notifications
@@ -100,8 +117,9 @@ class NewNotesListViewController: UIViewController {
         collectionView.reloadData()
     }
     
-    private func showAll() {
-        fetchedResultsController = getFetchedResultsController()
+    func showAll() {
+        let frc = getFetchedResultsController()
+        setNewFetchedResultController(frc)
         
         do {
             try fetchedResultsController.performFetch()
@@ -124,8 +142,6 @@ class NewNotesListViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension NewNotesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return notes.count
-        
         guard let sectionInfo = fetchedResultsController.sections?[section] else { return 0 }
 
         return sectionInfo.numberOfObjects
@@ -145,7 +161,6 @@ extension NewNotesListViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension NewNotesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //let note = notes[indexPath.row]
         let note = fetchedResultsController.object(at: indexPath)
         let detailVC = NoteDetailsViewController(kind: .existing(note: note), managedContext: coreDataStack.managedContext)
         detailVC.delegate = self
