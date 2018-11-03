@@ -25,12 +25,21 @@ class NotebookListViewController: UIViewController {
         fetchRequest.predicate = predicate
         
         let sort = NSSortDescriptor(key: #keyPath(Notebook.creationDate), ascending: true)
+
         fetchRequest.sortDescriptors = [sort]
         
+        // Con secciones por fecha
+//        return NSFetchedResultsController(
+//            fetchRequest: fetchRequest,
+//            managedObjectContext: coreDataStack.managedContext,
+//            sectionNameKeyPath: #keyPath(Notebook.creationDate),
+//            cacheName: nil)
+        
+        // Sin secciones secciones por fecha
         return NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: coreDataStack.managedContext,
-            sectionNameKeyPath: #keyPath(Notebook.creationDate),
+            sectionNameKeyPath: nil,
             cacheName: nil)
     }
     
@@ -254,6 +263,8 @@ extension NotebookListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let notebook = fetchedResultsController.object(at: indexPath)
         navigationController?.pushViewController(PresentNotesVC(notebook: notebook, coreDataStack: coreDataStack), animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
