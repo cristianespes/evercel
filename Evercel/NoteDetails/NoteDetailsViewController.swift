@@ -158,7 +158,7 @@ class NoteDetailsViewController: UIViewController {
     func isTitleNotEmpty(title: String?) -> Bool {
         guard let title = title, title != "" else {
             
-            let alertController = UIAlertController(title: "Guardar nota", message: "Para poder guardar la nota correctamente debe incluir un título", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Advertencia", message: "Para poder guardar la nota correctamente debe incluir un título", preferredStyle: .alert)
             
             let cancelAction = UIAlertAction(title: "Aceptar", style: .cancel, handler: nil)
             
@@ -193,7 +193,7 @@ class NoteDetailsViewController: UIViewController {
     @objc private func cancel() {
         switch kind {
         case .existing(let note):
-            let modifiedNote = addProperties(to: note)
+            let modifiedNote = note
             modifiedNote.lastSeenDate = NSDate()
         default:
             break
