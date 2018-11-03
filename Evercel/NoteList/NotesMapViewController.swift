@@ -61,12 +61,20 @@ class NotesMapViewController: UIViewController {
         
         // Nos damos de alta en las notificaciones
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(notesDidChange), name: Notification.Name(rawValue: "didChangeNote"), object: nil)
+        notificationCenter.addObserver(self, selector: #selector(notesDidChange), name: Notification.Name(rawValue: "didAddNote"), object: nil)
     }
     
     // MARK: - Notifications
     @objc func notesDidChange(notification: Notification) {
-        // Actualizar el mapa
+        // Actualizar notas
+        self.notes = (notebook.notes?.array as? [Note]) ?? []
+        
+        // Limpiar las anotaciones actuales
+        mapView.annotations.forEach{mapView.removeAnnotation($0)}
+        
+        // Actualizar mapa
+        loadLocationsOfNote()
+        mapView.addAnnotations(locationsOfNote)
     }
     
     func setupUI() {
