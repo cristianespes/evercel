@@ -105,12 +105,14 @@ class NoteDetailsViewController: UIViewController {
     @objc private func saveNote() {
         switch kind {
         case .new(let notebook):
+            guard isTitleNotEmpty(title: titleTextField.text) else { return }
+            
             let note = Note(context: managedContext)
-            let modifiedNote = addProperties(to: note)
-            modifiedNote.creationDate = NSDate()
-            modifiedNote.lastSeenDate = NSDate()
-            modifiedNote.notebook = notebook
-            modifiedNote.tag = tagTextField.text
+            let newNote = addProperties(to: note)
+            newNote.creationDate = NSDate()
+            newNote.lastSeenDate = NSDate()
+            newNote.notebook = notebook
+            newNote.tag = tagTextField.text
             
             if let notes = notebook.notes?.mutableCopy() as? NSMutableOrderedSet {
                 notes.add(note)
@@ -138,6 +140,8 @@ class NoteDetailsViewController: UIViewController {
             nc.post(notification)
             
         case .existing(let note):
+            guard isTitleNotEmpty(title: titleTextField.text) else { return }
+            
             let modifiedNote = addProperties(to: note)
             modifiedNote.lastSeenDate = NSDate()
         }
@@ -149,6 +153,23 @@ class NoteDetailsViewController: UIViewController {
         }
         
         dismiss(animated: true, completion: nil)
+    }
+    
+    func isTitleNotEmpty(title: String?) -> Bool {
+        guard let title = title, title != "" else {
+            
+            let alertController = UIAlertController(title: "Guardar nota", message: "Para poder guardar la nota correctamente debe incluir un título", preferredStyle: .alert)
+            
+            let cancelAction = UIAlertAction(title: "Aceptar", style: .cancel, handler: nil)
+            
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true)
+            
+            return false
+        }
+        
+        return true
     }
     
     @objc private func deleteNote() {
