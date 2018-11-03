@@ -29,18 +29,18 @@ class NotebookListViewController: UIViewController {
         fetchRequest.sortDescriptors = [sort]
         
         // Con secciones por fecha
-//        return NSFetchedResultsController(
-//            fetchRequest: fetchRequest,
-//            managedObjectContext: coreDataStack.managedContext,
-//            sectionNameKeyPath: #keyPath(Notebook.creationDate),
-//            cacheName: nil)
-        
-        // Sin secciones secciones por fecha
         return NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: coreDataStack.managedContext,
-            sectionNameKeyPath: nil,
+            sectionNameKeyPath: #keyPath(Notebook.stringCreationDate),
             cacheName: nil)
+        
+        // Sin secciones secciones por fecha
+//        return NSFetchedResultsController(
+//            fetchRequest: fetchRequest,
+//            managedObjectContext: coreDataStack.managedContext,
+//            sectionNameKeyPath: nil,
+//            cacheName: nil)
     }
     
     private func setNewFetchedResultController(_ newFrc: NSFetchedResultsController<Notebook>) {
@@ -272,14 +272,13 @@ extension NotebookListViewController: UITableViewDelegate {
         
         guard let dateString = sectionInfo?.name else { return sectionInfo?.name }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-        let date = dateFormatter.date(from: dateString)
-        //print("date: \(date?.customStringLabel())")
-//        dateFormatter.dateFormat = "dd/MM/yyyy"
-//        let sectionDate = dateFormatter.string(from:date!)
+//        print("Valor del String que llega: \(dateString)")
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+//        let date = dateFormatter.date(from: dateString)
+//        return date?.customStringLabel()
         
-        return date?.customStringLabel()
+        return dateString
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

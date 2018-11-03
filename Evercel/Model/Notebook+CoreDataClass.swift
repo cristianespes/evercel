@@ -16,6 +16,27 @@ public class Notebook: NSManagedObject {
 }
 
 extension Notebook {
+    
+    @objc var stringCreationDate: NSString {
+        let formatter = DateFormatter()
+        // initially set the format based on your datepicker date / server String
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let myString = formatter.string(from: creationDate! as Date)
+        
+        // convert your string to date
+        let myDate = formatter.date(from: myString)
+        //then again set the date format whhich type of output you need
+        formatter.dateFormat = "dd-MMM-yyyy"
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        
+        // again convert your date to string
+        let myStringafd = formatter.string(from: myDate!)
+        
+        return myStringafd as NSString
+    }
+    
     func csv() -> String {
         let exportedTitle = name ?? "Sin título"
         let exportedCreationDate = (creationDate as Date?)?.customStringLabel() ?? "Fecha no disponible"
