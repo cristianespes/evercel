@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VrE-SV-ulg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VrE-SV-ulg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WAo-uD-GFl">
-                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="524.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NotebookListCell" rowHeight="84" id="rvN-DE-8cB" customClass="NotebookListCell" customModule="Evercel" customModuleProvider="target">
@@ -99,8 +99,8 @@
                             <constraint firstItem="U5Z-li-giq" firstAttribute="trailing" secondItem="b5g-uu-wYe" secondAttribute="trailing" constant="-10" id="Eyi-wB-lMF"/>
                             <constraint firstItem="b5g-uu-wYe" firstAttribute="bottom" secondItem="U5Z-li-giq" secondAttribute="bottom" id="Kl1-7A-D6L"/>
                             <constraint firstItem="WAo-uD-GFl" firstAttribute="trailing" secondItem="b5g-uu-wYe" secondAttribute="trailing" id="YfO-iF-Ib1"/>
-                            <constraint firstItem="WAo-uD-GFl" firstAttribute="bottom" secondItem="b5g-uu-wYe" secondAttribute="bottom" id="nnD-W8-u1t"/>
                             <constraint firstItem="U5Z-li-giq" firstAttribute="leading" secondItem="b5g-uu-wYe" secondAttribute="leading" constant="10" id="nwF-YU-gl2"/>
+                            <constraint firstItem="ozW-mg-96R" firstAttribute="top" secondItem="WAo-uD-GFl" secondAttribute="bottom" constant="6" id="pVf-Sa-H2Y"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b5g-uu-wYe"/>
                     </view>

@@ -91,7 +91,7 @@ class NotebookListViewController: UIViewController {
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self // Objeto responsable de actualizar los resultados
         search.obscuresBackgroundDuringPresentation = false // quiero mostrar toda la tabla
-        search.searchBar.placeholder = "Buscar Notebook..."
+        search.searchBar.placeholder = "Buscar notebook..."
         search.searchBar.tintColor = .white
         
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -272,13 +272,13 @@ extension NotebookListViewController: UITableViewDelegate {
         
         guard let dateString = sectionInfo?.name else { return sectionInfo?.name }
         
-//        print("Valor del String que llega: \(dateString)")
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-//        let date = dateFormatter.date(from: dateString)
-//        return date?.customStringLabel()
-        
         return dateString
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        view.tintColor = UIColor.lightBurlywood
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = .brown
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
